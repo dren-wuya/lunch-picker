@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f3efe5">
+    <meta name="description" content="陆家嘴中心 L+MALL 工作日午餐随机选择器">
+    <title>今天吃什么</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="site-header">
+        <a class="brand" href="#today" data-nav="today" aria-label="返回今天">
+          <span class="brand-mark" aria-hidden="true">午</span>
+          <span>
+            <strong>今天吃什么</strong>
+            <small>陆家嘴中心午餐抽签</small>
+          </span>
+        </a>
+        <p id="header-date" class="header-date"></p>
+      </header>
+
+      <main>
+        <section id="view-today" class="view" aria-labelledby="today-title">
+          <div class="today-grid">
+            <div class="decision-panel">
+              <div class="eyebrow">工作日午餐 · 1–2 人</div>
+              <h1 id="today-title">少想一会儿，<br>把午饭交给运气。</h1>
+              <p class="lead">默认从泰康大厦楼下白名单等概率抽取；最近两顿吃过的店暂不参与。</p>
+
+              <fieldset class="scope-picker">
+                <legend>今天想走多远？</legend>
+                <div class="segmented-control">
+                  <label>
+                    <input type="radio" name="scope" value="primary" checked>
+                    <span>楼下</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="scope" value="secondary">
+                    <span>出去走走</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="scope" value="all">
+                    <span>都可以</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <button id="draw-button" class="button button-primary button-large" type="button">
+                帮我选一家
+              </button>
+              <p id="draw-message" class="inline-message" role="status" aria-live="polite"></p>
+            </div>
+
+            <section id="result-section" class="result-section" hidden aria-labelledby="result-name">
+              <p class="eyebrow">抽到了</p>
+              <div class="result-card">
+                <div class="result-topline">
+                  <span id="result-scope" class="badge"></span>
+                  <span id="result-price" class="result-price"></span>
+                </div>
+                <h2 id="result-name"></h2>
+                <p id="result-cuisine" class="result-cuisine"></p>
+                <dl class="result-details">
+                  <div>
+                    <dt>位置</dt>
+                    <dd id="result-location"></dd>
+                  </div>
+                  <div id="result-walk-row" hidden>
+                    <dt>步行</dt>
+                    <dd id="result-walk"></dd>
+                  </div>
+                </dl>
+                <a id="result-map" class="map-link" href="#" target="_blank" rel="noopener noreferrer">在高德地图中查看 <span aria-hidden="true">↗</span></a>
+                <div class="result-actions">
+                  <button id="confirm-button" class="button button-primary" type="button">就吃这家</button>
+                  <button id="reroll-button" class="button button-secondary" type="button">换一家</button>
+                </div>
+              </div>
+            </section>
+
+            <aside class="today-side">
+              <section id="today-status" class="status-card" aria-labelledby="today-status-title">
+                <div class="card-heading">
+                  <div>
+                    <p class="eyebrow">今天</p>
+                    <h2 id="today-status-title">还没有记录</h2>
+                  </div>
+                  <span id="today-status-badge" class="badge badge-muted">未记录</span>
+                </div>
+                <p id="today-status-detail">抽到满意的餐厅后再确认，或者手动补一条。</p>
+                <div class="compact-actions">
+                  <button id="manual-today-button" class="button button-quiet" type="button">手动记录</button>
+                  <button id="skip-today-button" class="button button-quiet" type="button">今天跳过</button>
+                </div>
+              </section>
+
+              <section class="rule-note" aria-label="当前规则">
+                <span class="rule-number">2</span>
+                <p><strong>两顿冷却</strong><br>最近两条有效餐厅记录中的店，默认概率为 0。</p>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+        <section id="view-history" class="view" hidden aria-labelledby="history-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">午餐记录</p>
+              <h1 id="history-title">吃过什么，一目了然。</h1>
+            </div>
+            <button id="add-history-button" class="button button-primary" type="button">补记午餐</button>
+          </div>
+          <div id="history-list" class="history-list"></div>
+        </section>
+
+        <section id="view-data" class="view" hidden aria-labelledby="data-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">本地数据</p>
+              <h1 id="data-title">数据由你保管。</h1>
+              <p class="lead narrow">没有账号或云同步。导出 JSON 后，你可以用自己的方式备份或编辑餐厅白名单。</p>
+            </div>
+          </div>
+
+          <div class="data-grid">
+            <section class="data-card">
+              <div class="card-heading">
+                <h2>完整备份</h2>
+                <span id="history-count" class="badge badge-muted"></span>
+              </div>
+              <p>包含餐厅、历史和设置。导入时整体替换当前本地数据。</p>
+              <div class="stacked-actions">
+                <button id="export-backup-button" class="button button-secondary" type="button">导出完整备份</button>
+                <label class="button button-quiet file-button">
+                  导入完整备份
+                  <input id="import-backup-input" type="file" accept="application/json,.json">
+                </label>
+              </div>
+            </section>
+
+            <section class="data-card">
+              <div class="card-heading">
+                <h2>餐厅白名单</h2>
+                <span id="restaurant-count" class="badge badge-muted"></span>
+              </div>
+              <p>只包含餐厅配置。导入时替换白名单，但保留个人历史。</p>
+              <div class="stacked-actions">
+                <button id="export-restaurants-button" class="button button-secondary" type="button">导出餐厅配置</button>
+                <label class="button button-quiet file-button">
+                  导入餐厅配置
+                  <input id="import-restaurants-input" type="file" accept="application/json,.json">
+                </label>
+              </div>
+            </section>
+          </div>
+
+          <p id="data-message" class="inline-message" role="status" aria-live="polite"></p>
+          <section class="data-footnote">
+            <h2>默认名单说明</h2>
+            <p>首版名单按 2026-08-27 可检索的商场、品牌、地图和餐饮平台公开信息整理。价格及步行时间均为参考值；遇到闭店、搬迁或明显不适合午休的情况，请导出餐厅 JSON 修订后再导入。</p>
+          </section>
+        </section>
+      </main>
+
+      <nav class="bottom-nav" aria-label="主导航">
+        <button class="nav-button is-active" type="button" data-view="today" aria-current="page">今天</button>
+        <button class="nav-button" type="button" data-view="history">历史</button>
+        <button class="nav-button" type="button" data-view="data">数据</button>
+      </nav>
+    </div>
+
+    <dialog id="record-dialog" class="record-dialog">
+      <form id="record-form" method="dialog">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">午餐记录</p>
+            <h2 id="record-dialog-title">补记午餐</h2>
+          </div>
+          <button id="close-dialog-button" class="icon-button" type="button" aria-label="关闭">×</button>
+        </div>
+
+        <label class="form-field">
+          <span>日期</span>
+          <input id="record-date" name="date" type="date" required>
+        </label>
+
+        <fieldset class="form-field">
+          <legend>状态</legend>
+          <div class="segmented-control two-options">
+            <label>
+              <input type="radio" name="record-status" value="restaurant" checked>
+              <span>吃了餐厅</span>
+            </label>
+            <label>
+              <input type="radio" name="record-status" value="skipped">
+              <span>跳过</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div id="restaurant-fields">
+          <label class="form-field">
+            <span>餐厅</span>
+            <select id="record-restaurant" name="restaurant"></select>
+          </label>
+          <label class="form-field">
+            <span>场景</span>
+            <select id="record-source" name="source">
+              <option value="manual">普通午餐</option>
+              <option value="company">公司聚餐</option>
+            </select>
+          </label>
+        </div>
+
+        <label id="skip-field" class="form-field" hidden>
+          <span>原因</span>
+          <select id="record-reason" name="reason">
+            <option value="leave">请假</option>
+            <option value="company_elsewhere">公司聚餐去了白名单外</option>
+            <option value="other">其他</option>
+          </select>
+        </label>
+
+        <p id="record-error" class="form-error" role="alert"></p>
+        <div class="dialog-actions">
+          <button id="delete-record-button" class="button button-danger" type="button" hidden>清除记录</button>
+          <span class="dialog-spacer"></span>
+          <button id="cancel-dialog-button" class="button button-quiet" type="button">取消</button>
+          <button class="button button-primary" type="submit">保存</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="./js/app.mjs"></script>
+  </body>
+</html>
