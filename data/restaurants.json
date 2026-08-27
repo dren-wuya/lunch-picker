@@ -12,6 +12,7 @@
       "walking_minutes": null,
       "price_per_person": 60,
       "pork_free_hint": "可选牛肉面、鸡饭等主食，点餐时确认配料。",
+      "recommended_dishes": ["沙茶牛肉面", "鸡扒饭"],
       "map_query": "敏华冰厅 陆家嘴中心店",
       "active": true,
       "source_urls": [
@@ -27,6 +28,7 @@
       "walking_minutes": null,
       "price_per_person": 37,
       "pork_free_hint": "可自选非猪肉食材，点餐时确认汤底。",
+      "recommended_dishes": ["泰式酸辣汤底自选", "牛肉与蔬菜自选"],
       "map_query": "超级泰泰式麻辣烫 陆家嘴中心店",
       "active": true,
       "source_urls": [
@@ -42,6 +44,7 @@
       "walking_minutes": null,
       "price_per_person": 59,
       "pork_free_hint": "可选鸡肉、牛肉或素食主食，点餐时确认。",
+      "recommended_dishes": ["海鲜泡饭", "白切鸡", "素菌菇小笼"],
       "map_query": "董小婉 陆家嘴中心店",
       "active": true,
       "source_urls": [
@@ -57,6 +60,7 @@
       "walking_minutes": null,
       "price_per_person": 58,
       "pork_free_hint": "可选牛肉或鸡肉汉堡，点餐时确认酱料。",
+      "recommended_dishes": ["牛肉汉堡", "鸡翅"],
       "map_query": "CHARLIE'S 粉红汉堡 陆家嘴中心店",
       "active": true,
       "source_urls": [
@@ -72,6 +76,7 @@
       "walking_minutes": null,
       "price_per_person": 58,
       "pork_free_hint": "可选芝士、海鲜或鸡肉主食，点餐时确认。",
+      "recommended_dishes": ["鸡肉披萨", "西冷牛排", "凤尾虾"],
       "map_query": "必胜客 陆家嘴中心店",
       "active": true,
       "source_urls": [
@@ -87,6 +92,7 @@
       "walking_minutes": null,
       "price_per_person": 40,
       "pork_free_hint": "可选鸡肉套餐，点餐时确认配料。",
+      "recommended_dishes": ["原味鸡", "鸡肉汉堡套餐"],
       "map_query": "肯德基 陆家嘴中心店",
       "active": true,
       "source_urls": [
@@ -95,17 +101,18 @@
     },
     {
       "id": "toris",
-      "name": "TORIS 鸟食",
-      "cuisine": "日式盖饭与烧鸟",
+      "name": "Toris",
+      "cuisine": "西式融合与意面",
       "scope": "primary",
       "location": "L+MALL LG50",
       "walking_minutes": null,
       "price_per_person": 100,
-      "pork_free_hint": "可选鸡肉盖饭或鸡肉定食。",
-      "map_query": "TORIS 鸟食 陆家嘴中心店",
+      "pork_free_hint": "可选鸡肉、牛排或海鲜意面，点餐时确认酱汁。",
+      "recommended_dishes": ["冬阴功意面", "大厨蒜香蟹肉意面", "黑松露土豆泥佐牛排"],
+      "map_query": "Toris 陆家嘴中心L+Mall店",
       "active": true,
       "source_urls": [
-        "https://maps.apple.com/?q=TORIS%20%E9%B8%9F%E9%A3%9F%20%E9%99%86%E5%AE%B6%E5%98%B4%E4%B8%AD%E5%BF%83"
+        "https://maps.apple.com/place?auid=1118673339591876&lsp=57879"
       ]
     },
     {
@@ -117,6 +124,7 @@
       "walking_minutes": null,
       "price_per_person": 55,
       "pork_free_hint": "可选虾仁蛋包饭等主食，点餐时确认。",
+      "recommended_dishes": ["虾仁蛋包饭", "鸡肉定食"],
       "map_query": "平成屋 陆家嘴中心店",
       "active": true,
       "source_urls": [
@@ -132,6 +140,7 @@
       "walking_minutes": null,
       "price_per_person": 100,
       "pork_free_hint": "可选海南鸡饭等鸡肉或海鲜主食。",
+      "recommended_dishes": ["海南鸡饭", "叻沙"],
       "map_query": "南惹野 东南亚bistro 陆家嘴中心",
       "active": true,
       "source_urls": [
@@ -147,6 +156,7 @@
       "walking_minutes": null,
       "price_per_person": 84,
       "pork_free_hint": "可选牛肉寿喜烧套餐。",
+      "recommended_dishes": ["牛肉寿喜烧套餐", "蔬菜拼盘"],
       "map_query": "孤独的寿喜烧 陆家嘴中心",
       "active": true,
       "source_urls": [
@@ -162,6 +172,7 @@
       "walking_minutes": null,
       "price_per_person": 104,
       "pork_free_hint": "可选鱼、鸡或牛肉菜品，点餐时确认。",
+      "recommended_dishes": ["水煮鱼", "口水鸡", "酸汤肥牛"],
       "map_query": "天辣 陆家嘴中心店",
       "active": true,
       "source_urls": [
@@ -177,6 +188,7 @@
       "walking_minutes": null,
       "price_per_person": 104,
       "pork_free_hint": "可选沙茶牛腩、海鲜或素菜配饭。",
+      "recommended_dishes": ["沙茶牛腩", "海鲜汤饭", "姜母鸭"],
       "map_query": "闽叔福建菜 陆家嘴中心L+Mall店",
       "active": true,
       "source_urls": [
@@ -192,6 +204,7 @@
       "walking_minutes": null,
       "price_per_person": 100,
       "pork_free_hint": "可选虾仁水饺、鲜虾泡饭或鸡肉菜品，点餐时确认馅料。",
+      "recommended_dishes": ["鲜虾泡饭", "虾仁水饺", "鸡肉菜品"],
       "map_query": "喜顶上品海胆水饺 陆家嘴中心店",
       "active": true,
       "source_urls": [
@@ -207,6 +220,7 @@
       "walking_minutes": null,
       "price_per_person": 100,
       "pork_free_hint": "可选鸡肉、牛肉或素食主食。",
+      "recommended_dishes": ["披萨", "奶油鸡", "牛排"],
       "map_query": "OTF加州餐厅 陆家嘴中心店",
       "active": true,
       "source_urls": [
@@ -222,6 +236,7 @@
       "walking_minutes": null,
       "price_per_person": 80,
       "pork_free_hint": "午市可选鸡肉、牛肉或海鲜套餐。",
+      "recommended_dishes": ["午市意面", "牛排", "海鲜主食"],
       "map_query": "斯比特花园 陆家嘴中心店",
       "active": true,
       "source_urls": [
@@ -237,6 +252,7 @@
       "walking_minutes": null,
       "price_per_person": 117,
       "pork_free_hint": "可选鸡、鱼、牛肉或素菜配饭。",
+      "recommended_dishes": ["豌豆鱼", "麻辣鱼片", "鸡肉菜品"],
       "map_query": "柴门饭儿 陆家嘴中心店",
       "active": true,
       "source_urls": [
@@ -252,6 +268,7 @@
       "walking_minutes": null,
       "price_per_person": 138,
       "pork_free_hint": "可选鱼虾、鸡肉或素菜配饭。",
+      "recommended_dishes": ["清炒虾仁", "油爆虾", "白水鱼"],
       "map_query": "蘭心餐厅 陆家嘴中心店",
       "active": true,
       "source_urls": [
@@ -267,6 +284,7 @@
       "walking_minutes": null,
       "price_per_person": 107,
       "pork_free_hint": "可用虾饺、鸡肉、牛肉与饭类组合完整午餐。",
+      "recommended_dishes": ["鲜虾饺", "鸡肉饭", "牛肉肠粉"],
       "map_query": "添好运 陆家嘴中心店",
       "active": true,
       "source_urls": [
@@ -282,6 +300,7 @@
       "walking_minutes": null,
       "price_per_person": 130,
       "pork_free_hint": "可选鱼、鸡、牛肉或素菜，点餐时确认。",
+      "recommended_dishes": ["水煮鱼", "口水鸡", "酸汤肥牛"],
       "map_query": "孔雀川菜 陆家嘴中心店",
       "active": true,
       "source_urls": [
@@ -297,6 +316,7 @@
       "walking_minutes": null,
       "price_per_person": 104,
       "pork_free_hint": "可选鸡、牛肉、海鲜或素食主食。",
+      "recommended_dishes": ["酸菜鱼", "干炒牛河", "海鲜主食"],
       "map_query": "港丽餐厅 陆家嘴中心店",
       "active": true,
       "source_urls": [
@@ -312,6 +332,7 @@
       "walking_minutes": 7,
       "price_per_person": 60,
       "pork_free_hint": "可选牛肉、鸡肉或素食冒菜，点餐时确认汤底。",
+      "recommended_dishes": ["麻辣牛肉串", "泡椒牛肉", "蔬菜串配主食"],
       "map_query": "付小姐在成都 乳山路76号",
       "active": true,
       "source_urls": [
@@ -327,6 +348,7 @@
       "walking_minutes": 7,
       "price_per_person": 68,
       "pork_free_hint": "以牛肉为主，可组成不含猪肉的完整午餐。",
+      "recommended_dishes": ["沙茶牛腩饭", "牛肉粿条汤", "酸菜牛肉饭"],
       "map_query": "草根牛肉档 新大陆广场店",
       "active": true,
       "source_urls": [
@@ -342,6 +364,7 @@
       "walking_minutes": 7,
       "price_per_person": 35,
       "pork_free_hint": "可选鸡肉套餐及素菜。",
+      "recommended_dishes": ["老母鸡汤", "鸡肉套餐"],
       "map_query": "老乡鸡 新大陆广场店",
       "active": true,
       "source_urls": [
@@ -357,6 +380,7 @@
       "walking_minutes": 6,
       "price_per_person": 54,
       "pork_free_hint": "可选虾仁、蟹粉或素浇头，点餐时确认汤底。",
+      "recommended_dishes": ["三虾面", "手剥虾仁面", "罗汉净素面"],
       "map_query": "裕兴记 新大陆广场店",
       "active": true,
       "source_urls": [
@@ -372,6 +396,7 @@
       "walking_minutes": 5,
       "price_per_person": 73,
       "pork_free_hint": "可选狮头鹅饭，点餐时避开猪杂配菜。",
+      "recommended_dishes": ["狮头鹅肉饭", "鹅胗饭"],
       "map_query": "鹅匠 潮汕卤味集市 新梅联合广场店",
       "active": true,
       "source_urls": [
@@ -387,6 +412,7 @@
       "walking_minutes": 8,
       "price_per_person": 105,
       "pork_free_hint": "可选羊肉、牛肉、鸡肉或素食主食。",
+      "recommended_dishes": ["烤羊肉串", "手撕椒麻鸡", "莜面"],
       "map_query": "西贝莜面村 新梅联合广场店",
       "active": true,
       "source_urls": [
@@ -402,6 +428,7 @@
       "walking_minutes": 4,
       "price_per_person": 35,
       "pork_free_hint": "可选鸡肉、牛肉、鸡蛋或素食套餐。",
+      "recommended_dishes": ["湘味牛腩套餐", "鸡蛋与豆浆套餐"],
       "map_query": "永和豆浆 南泉北路400号",
       "active": true,
       "source_urls": [
@@ -417,6 +444,7 @@
       "walking_minutes": 7,
       "price_per_person": 98,
       "pork_free_hint": "可选牛肉、鸡肉、鱼或素菜配饭。",
+      "recommended_dishes": ["江西小炒牛肉", "辣椒炒鸡", "鱼类配饭"],
       "map_query": "欧记大排档 景德菜 浦东首店",
       "active": true,
       "source_urls": [

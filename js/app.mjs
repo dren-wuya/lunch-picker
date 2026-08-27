@@ -37,6 +37,8 @@ let state = null;
 let currentRestaurant = null;
 let sessionSeenIds = new Set();
 let editingDate = null;
+let guideScope = "all";
+let defaultRestaurantsById = new Map();
 
 function byId(id) {
   return document.getElementById(id);
@@ -68,6 +70,8 @@ function cacheElements() {
     "add-history-button",
     "history-count",
     "restaurant-count",
+    "guide-catalog-summary",
+    "restaurant-directory",
     "export-backup-button",
     "export-restaurants-button",
     "import-backup-input",
@@ -232,6 +236,102 @@ function renderDataCounts() {
   elements["history-count"].textContent = state.history.length + " 条";
 }
 
+function getGuideMetadata(restaurant) {
+  const defaultRestaurant = defaultRestaurantsById.get(restaurant.id) || {};
+  return {
+    recommendedDishes: restaurant.recommended_dishes || defaultRestaurant.recommended_dishes || [],
+    sourceUrls: restaurant.source_urls || defaultRestaurant.source_urls || []
+  };
+}
+
+function createRestaurantDirectoryCard(restaurant) {
+  const metadata = getGuideMetadata(restaurant);
+  const card = makeElement("article", "restaurant-directory-card");
+  const heading = makeElement("div", "restaurant-directory-heading");
+  const monogram = makeElement("span", "restaurant-monogram", restaurant.name.trim().charAt(0).toUpperCase());
+  monogram.setAttribute("aria-hidden", "true");
+
+  const titleGroup = makeElement("div", "restaurant-title-group");
+  const badges = makeElement("div", "restaurant-badges");
+  badges.append(makeElement("span", "badge", SCOPE_LABELS[restaurant.scope]));
+  badges.append(makeElement("span", "badge badge-muted", "参考 ¥" + restaurant.price_per_person + "/人"));
+  titleGroup.append(badges);
+  titleGroup.append(makeElement("h3", "", restaurant.name));
+  titleGroup.append(makeElement("p", "restaurant-cuisine", restaurant.cuisine));
+  heading.append(monogram, titleGroup);
+
+  const facts = makeElement("dl", "restaurant-directory-facts");
+  const location = makeElement("div", "");
+  location.append(makeElement("dt", "", "位置"));
+  location.append(makeElement("dd", "", restaurant.location));
+  facts.append(location);
+  if (restaurant.scope === "secondary") {
+    const walk = makeElement("div", "");
+    walk.append(makeElement("dt", "", "步行"));
+    walk.append(makeElement("dd", "", "约 " + restaurant.walking_minutes + " 分钟（单程）"));
+    facts.append(walk);
+  }
+
+  card.append(heading, facts);
+
+  if (metadata.recommendedDishes.length > 0) {
+    const recommendation = makeElement("div", "restaurant-recommendation");
+    recommendation.append(makeElement("strong", "", "午餐建议"));
+    recommendation.append(makeElement("p", "", metadata.recommendedDishes.join(" · ")));
+    card.append(recommendation);
+  }
+
+  if (restaurant.pork_free_hint) {
+    const porkFree = makeElement("p", "restaurant-pork-free");
+    porkFree.append(makeElement("strong", "", "无猪肉提示："));
+    porkFree.append(document.createTextNode(restaurant.pork_free_hint));
+    card.append(porkFree);
+  }
+
+  const actions = makeElement("div", "restaurant-directory-actions");
+  const mapLink = makeElement("a", "button button-secondary", "打开地图");
+  mapLink.href = getMapUrl(restaurant);
+  mapLink.target = "_blank";
+  mapLink.rel = "noopener noreferrer";
+  actions.append(mapLink);
+
+  if (metadata.sourceUrls.length > 0) {
+    const sourceLink = makeElement("a", "button button-quiet", "公开资料");
+    sourceLink.href = metadata.sourceUrls[0];
+    sourceLink.target = "_blank";
+    sourceLink.rel = "noopener noreferrer";
+    actions.append(sourceLink);
+  }
+  card.append(actions);
+  return card;
+}
+
+function renderGuide() {
+  const activeRestaurants = state.restaurants.filter((restaurant) => restaurant.active !== false);
+  const primaryCount = activeRestaurants.filter((restaurant) => restaurant.scope === "primary").length;
+  const secondaryCount = activeRestaurants.filter((restaurant) => restaurant.scope === "secondary").length;
+  const verifiedAt = state.restaurants_verified_at || "未标注";
+  elements["guide-catalog-summary"].textContent = "当前浏览器共 " + activeRestaurants.length
+    + " 家：楼下 " + primaryCount + " 家，附近 " + secondaryCount
+    + " 家。名单核验日期：" + verifiedAt + "。";
+
+  const directory = elements["restaurant-directory"];
+  directory.replaceChildren();
+  const visibleRestaurants = activeRestaurants.filter((restaurant) => (
+    guideScope === "all" || restaurant.scope === guideScope
+  ));
+  if (visibleRestaurants.length === 0) {
+    directory.append(makeElement("p", "empty-state", "当前范围没有可展示的餐厅。"));
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+  visibleRestaurants.forEach((restaurant) => {
+    fragment.append(createRestaurantDirectoryCard(restaurant));
+  });
+  directory.append(fragment);
+}
+
 function renderAll() {
   const selectedScope = document.querySelector('input[name="scope"][value="' + state.settings.scope + '"]');
   if (selectedScope) {
@@ -240,6 +340,7 @@ function renderAll() {
   renderTodayStatus();
   renderHistory();
   renderDataCounts();
+  renderGuide();
 }
 
 function getMapUrl(restaurant) {
@@ -486,7 +587,7 @@ function deleteEditingRecord() {
 }
 
 function showView(name) {
-  const validName = ["today", "history", "data"].includes(name) ? name : "today";
+  const validName = ["today", "history", "data", "guide"].includes(name) ? name : "today";
   document.querySelectorAll(".view").forEach((view) => {
     view.hidden = view.id !== "view-" + validName;
   });
@@ -619,6 +720,18 @@ function bindEvents() {
     });
   });
 
+  document.querySelectorAll("[data-guide-scope]").forEach((button) => {
+    button.addEventListener("click", () => {
+      guideScope = button.dataset.guideScope;
+      document.querySelectorAll("[data-guide-scope]").forEach((scopeButton) => {
+        const active = scopeButton === button;
+        scopeButton.classList.toggle("is-active", active);
+        scopeButton.setAttribute("aria-pressed", String(active));
+      });
+      renderGuide();
+    });
+  });
+
   elements["export-backup-button"].addEventListener("click", () => {
     downloadJson("lunch-picker-backup.json", createBackupExport(state));
   });
@@ -638,7 +751,8 @@ async function loadInitialState() {
   if (!response.ok) {
     throw new Error("无法读取默认餐厅配置（HTTP " + response.status + "）。");
   }
-  const defaultDocument = await response.json();
+  const defaultDocument = validateRestaurantsDocument(await response.json());
+  defaultRestaurantsById = new Map(defaultDocument.restaurants.map((restaurant) => [restaurant.id, restaurant]));
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored === null) {
     return createInitialState(defaultDocument);

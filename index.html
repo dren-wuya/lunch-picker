@@ -162,12 +162,92 @@
             <p>首版名单按 2026-08-27 可检索的商场、品牌、地图和餐饮平台公开信息整理。价格及步行时间均为参考值；遇到闭店、搬迁或明显不适合午休的情况，请导出餐厅 JSON 修订后再导入。</p>
           </section>
         </section>
+
+        <section id="view-guide" class="view" hidden aria-labelledby="guide-title">
+          <div class="guide-hero">
+            <p class="eyebrow">规则与名单</p>
+            <h1 id="guide-title">知道它怎么选，<br>也知道池子里有什么。</h1>
+            <p class="lead">随机不是黑箱：候选范围、冷却规则和当前白名单都在这里公开。餐厅目录读取的是这台设备正在使用的配置。</p>
+          </div>
+
+          <section class="guide-section" aria-labelledby="mechanism-title">
+            <div class="guide-section-heading">
+              <p class="eyebrow">随机机制</p>
+              <h2 id="mechanism-title">一次抽签，分四步。</h2>
+            </div>
+            <div class="mechanism-grid">
+              <article class="mechanism-card">
+                <span class="mechanism-number">01</span>
+                <h3>确定范围</h3>
+                <p>“楼下”只看 L+MALL；“出去走走”只看步行 8 分钟内的附近餐厅；“都可以”合并两者。</p>
+              </article>
+              <article class="mechanism-card">
+                <span class="mechanism-number">02</span>
+                <h3>执行冷却</h3>
+                <p>最近两条有效餐厅午餐记录中的店，当前权重为 0。跳过、未记录和周末不会占用这两顿。</p>
+              </article>
+              <article class="mechanism-card">
+                <span class="mechanism-number">03</span>
+                <h3>等概率抽取</h3>
+                <p>剩余餐厅的权重都是 1，使用浏览器的伪随机数等概率抽取。价格、菜系和远近不参与加权。</p>
+              </article>
+              <article class="mechanism-card">
+                <span class="mechanism-number">04</span>
+                <h3>确认才记录</h3>
+                <p>“换一家”只排除本轮已经出现的店，不会写入历史；只有点击“就吃这家”才更新当天记录和后续冷却。</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="guide-section" aria-labelledby="boundary-title">
+            <div class="guide-section-heading">
+              <p class="eyebrow">白名单边界</p>
+              <h2 id="boundary-title">为普通工作日午餐筛选。</h2>
+            </div>
+            <div class="boundary-grid">
+              <article>
+                <strong>楼下</strong>
+                <p>位于陆家嘴中心 L+MALL 内，从泰康大厦无需离开综合体即可到达。</p>
+              </article>
+              <article>
+                <strong>出去走走</strong>
+                <p>从泰康大厦办公楼大堂步行单程不超过 8 分钟，且不属于主范围。</p>
+              </article>
+              <article>
+                <strong>共同门槛</strong>
+                <p>适合 1–2 人、通常无需预约、到店后约 40 分钟内吃完，并有一份不含猪肉的完整午餐可选。</p>
+              </article>
+              <article>
+                <strong>价格口径</strong>
+                <p>正常午餐人均 ¥100 是收录软上限，不是抽取权重；少量更贵但适合午餐的店仍会保留。</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="guide-section" aria-labelledby="directory-title">
+            <div class="directory-heading">
+              <div>
+                <p class="eyebrow">当前餐厅目录</p>
+                <h2 id="directory-title">白名单里有哪些店？</h2>
+                <p id="guide-catalog-summary" class="directory-summary"></p>
+              </div>
+              <div class="guide-filters" aria-label="筛选餐厅范围">
+                <button class="guide-filter-button is-active" type="button" data-guide-scope="all" aria-pressed="true">全部</button>
+                <button class="guide-filter-button" type="button" data-guide-scope="primary" aria-pressed="false">楼下</button>
+                <button class="guide-filter-button" type="button" data-guide-scope="secondary" aria-pressed="false">附近</button>
+              </div>
+            </div>
+            <p class="directory-note">“午餐建议”是结合本工具的时间与无猪肉需求整理的点单方向，不是销量排行。餐厅实景和菜品照片暂不直接复制第三方素材；每张卡片提供地图与公开资料入口，后续只补充自有或已获授权照片。</p>
+            <div id="restaurant-directory" class="restaurant-directory"></div>
+          </section>
+        </section>
       </main>
 
       <nav class="bottom-nav" aria-label="主导航">
         <button class="nav-button is-active" type="button" data-view="today" aria-current="page">今天</button>
         <button class="nav-button" type="button" data-view="history">历史</button>
         <button class="nav-button" type="button" data-view="data">数据</button>
+        <button class="nav-button" type="button" data-view="guide">说明</button>
       </nav>
     </div>
 

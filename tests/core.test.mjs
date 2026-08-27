@@ -28,6 +28,7 @@ const appSource = await readFile(new URL("../js/app.mjs", import.meta.url), "utf
 test("默认白名单包含 20 家主范围和 8 家副范围餐厅", () => {
   assert.equal(state.restaurants.filter((item) => item.scope === "primary").length, 20);
   assert.equal(state.restaurants.filter((item) => item.scope === "secondary").length, 8);
+  assert.ok(state.restaurants.every((item) => item.recommended_dishes.length >= 1));
 });
 
 test("三种范围只返回对应候选池", () => {
@@ -154,6 +155,14 @@ test("餐厅配置导入会拒绝重复 id 和超过 8 分钟的副范围", () =
   const secondary = tooFar.restaurants.find((item) => item.scope === "secondary");
   secondary.walking_minutes = 9;
   assert.throws(() => validateRestaurantsDocument(tooFar), /1–8 分钟/);
+
+  const emptyRecommendations = structuredClone(restaurantsDocument);
+  emptyRecommendations.restaurants[0].recommended_dishes = [];
+  assert.throws(() => validateRestaurantsDocument(emptyRecommendations), /recommended_dishes 必须包含 1–5 项/);
+
+  const unsafeSource = structuredClone(restaurantsDocument);
+  unsafeSource.restaurants[0].source_urls = ["javascript:alert(1)"];
+  assert.throws(() => validateRestaurantsDocument(unsafeSource), /包含无效来源链接/);
 });
 
 test("页面 id 唯一，应用缓存的元素都存在于 HTML", () => {
@@ -170,4 +179,13 @@ test("GitHub Pages 所需资源全部使用仓库内相对路径", () => {
   assert.match(html, /href="\.\/styles\.css"/);
   assert.match(html, /src="\.\/js\/app\.mjs"/);
   assert.match(appSource, /fetch\("\.\/data\/restaurants\.json"/);
+});
+
+test("说明页公开算法并由当前餐厅配置渲染目录", () => {
+  assert.match(html, /id="view-guide"/);
+  assert.match(html, /最近两条有效餐厅午餐记录/);
+  assert.match(html, /价格、菜系和远近不参与加权/);
+  assert.match(html, /id="restaurant-directory"/);
+  assert.match(appSource, /function renderGuide\(\)/);
+  assert.match(appSource, /state\.restaurants\.filter/);
 });

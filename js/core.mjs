@@ -82,9 +82,20 @@ function validateRestaurant(restaurant, index) {
     assert(isNonEmptyString(restaurant.pork_free_hint), prefix + "的 pork_free_hint 必须是非空字符串。");
   }
 
+  if (restaurant.recommended_dishes !== undefined) {
+    assert(Array.isArray(restaurant.recommended_dishes), prefix + "的 recommended_dishes 必须是数组。");
+    assert(restaurant.recommended_dishes.length > 0 && restaurant.recommended_dishes.length <= 5,
+      prefix + "的 recommended_dishes 必须包含 1–5 项。");
+    restaurant.recommended_dishes.forEach((dish) => {
+      assert(isNonEmptyString(dish), prefix + "包含无效的推荐菜。");
+    });
+  }
+
   if (restaurant.source_urls !== undefined) {
     assert(Array.isArray(restaurant.source_urls), prefix + "的 source_urls 必须是数组。");
-    restaurant.source_urls.forEach((url) => assert(isNonEmptyString(url), prefix + "包含无效来源链接。"));
+    restaurant.source_urls.forEach((url) => {
+      assert(isNonEmptyString(url) && /^https:\/\//i.test(url), prefix + "包含无效来源链接。");
+    });
   }
 
   return clone(restaurant);
