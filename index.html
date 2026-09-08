@@ -72,7 +72,7 @@
                     <dd id="result-walk"></dd>
                   </div>
                 </dl>
-                <a id="result-map" class="map-link" href="#" target="_blank" rel="noopener noreferrer">在高德地图中查看 <span aria-hidden="true">↗</span></a>
+                <p id="result-dietary-notice" class="restaurant-pork-free" hidden></p>
                 <div class="result-actions">
                   <button id="confirm-button" class="button button-primary" type="button">就吃这家</button>
                   <button id="reroll-button" class="button button-secondary" type="button">换一家</button>
@@ -120,37 +120,22 @@
             <div>
               <p class="eyebrow">本地数据</p>
               <h1 id="data-title">数据由你保管。</h1>
-              <p class="lead narrow">没有账号或云同步。导出 JSON 后，你可以用自己的方式备份或编辑餐厅白名单。</p>
+              <p class="lead narrow">没有账号或云同步。个人数据可以导出为一个 JSON 备份；共享餐厅目录随部署版本更新。</p>
             </div>
           </div>
 
           <div class="data-grid">
             <section class="data-card">
               <div class="card-heading">
-                <h2>完整备份</h2>
+                <h2>个人数据备份</h2>
                 <span id="history-count" class="badge badge-muted"></span>
               </div>
-              <p>包含餐厅、历史和设置。导入时整体替换当前本地数据。</p>
+              <p>包含设置、偏好、个人新增与隐藏项、待入库名称和历史；不复制共享餐厅目录。导入时只替换个人数据。</p>
               <div class="stacked-actions">
-                <button id="export-backup-button" class="button button-secondary" type="button">导出完整备份</button>
+                <button id="export-backup-button" class="button button-secondary" type="button">导出个人备份</button>
                 <label class="button button-quiet file-button">
-                  导入完整备份
+                  导入个人备份
                   <input id="import-backup-input" type="file" accept="application/json,.json">
-                </label>
-              </div>
-            </section>
-
-            <section class="data-card">
-              <div class="card-heading">
-                <h2>餐厅白名单</h2>
-                <span id="restaurant-count" class="badge badge-muted"></span>
-              </div>
-              <p>只包含餐厅配置。导入时替换白名单，但保留个人历史。</p>
-              <div class="stacked-actions">
-                <button id="export-restaurants-button" class="button button-secondary" type="button">导出餐厅配置</button>
-                <label class="button button-quiet file-button">
-                  导入餐厅配置
-                  <input id="import-restaurants-input" type="file" accept="application/json,.json">
                 </label>
               </div>
             </section>
@@ -158,8 +143,8 @@
 
           <p id="data-message" class="inline-message" role="status" aria-live="polite"></p>
           <section class="data-footnote">
-            <h2>默认名单说明</h2>
-            <p>首版名单按 2026-08-27 可检索的商场、品牌、地图和餐饮平台公开信息整理。价格及步行时间均为参考值；遇到闭店、搬迁或明显不适合午休的情况，请导出餐厅 JSON 修订后再导入。</p>
+            <h2>共享目录说明</h2>
+            <p>共享目录由部署版提供，并在站点更新时自动采用最新版。价格及步行时间均为参考值；闭店、搬迁和范围修订由维护者在代码仓库统一更新，不通过个人备份覆盖。</p>
           </section>
         </section>
 
@@ -167,7 +152,7 @@
           <div class="guide-hero">
             <p class="eyebrow">规则与名单</p>
             <h1 id="guide-title">知道它怎么选，<br>也知道池子里有什么。</h1>
-            <p class="lead">随机不是黑箱：候选范围、冷却规则和当前白名单都在这里公开。餐厅目录读取的是这台设备正在使用的配置。</p>
+            <p class="lead">随机不是黑箱：候选范围、冷却规则和当前目录都在这里公开。实际候选由部署版共享目录与这台设备的个人增减项合成。</p>
           </div>
 
           <section class="guide-section" aria-labelledby="mechanism-title">
@@ -214,8 +199,8 @@
                 <p>从泰康大厦办公楼大堂步行单程不超过 8 分钟，且不属于主范围。</p>
               </article>
               <article>
-                <strong>共同门槛</strong>
-                <p>适合 1–2 人、通常无需预约、到店后约 40 分钟内吃完，并有一份不含猪肉的完整午餐可选。</p>
+                <strong>普通午餐</strong>
+                <p>适合 1–2 人、通常无需预约，并能在到店后约 40 分钟内吃完。忌口偏好不影响入池或权重，只在相关时给出提醒。</p>
               </article>
               <article>
                 <strong>价格口径</strong>
@@ -237,7 +222,7 @@
                 <button class="guide-filter-button" type="button" data-guide-scope="secondary" aria-pressed="false">附近</button>
               </div>
             </div>
-            <p class="directory-note">“午餐建议”是结合本工具的时间与无猪肉需求整理的点单方向，不是销量排行。餐厅实景和菜品照片暂不直接复制第三方素材；每张卡片提供地图与公开资料入口，后续只补充自有或已获授权照片。</p>
+            <p class="directory-note">位置、价格与步行时间用于快速判断，均以到店时实际情况为准。第一版不展示餐厅或菜品图片，也不提供地图入口；有来源时仅提供公开资料入口。</p>
             <div id="restaurant-directory" class="restaurant-directory"></div>
           </section>
         </section>
