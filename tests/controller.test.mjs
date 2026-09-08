@@ -109,7 +109,7 @@ test("忌口与来源只改变展示，不影响抽取；地图来源不出现�
 
 test("手工记录拒绝未来日期，且无效 intent 无法写入", () => {
   const app = controller();
-  assert.throws(() => app.dispatch({ type: "saveRecord", originalDate: null, date: "2026-09-08", status: "restaurant", restaurantId: "a", source: "manual", reason: "other", confirmed: false }), /今天或过去/);
+  assert.throws(() => app.dispatch({ type: "saveRecord", originalDate: null, date: "2026-09-08", status: "restaurant", restaurantId: "a", restaurantName: "甲店", source: "manual", reason: "other", confirmed: false }), /今天或过去/);
   assert.throws(() => app.dispatch({ type: "changeScope", scope: "invalid" }), /scope 无效/);
   assert.equal(app.getViewModel().history.length, 0);
 });

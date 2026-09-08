@@ -126,6 +126,11 @@
 
           <div class="data-grid">
             <section class="data-card">
+              <h2>忌口偏好</h2>
+              <label class="check-field"><input id="avoid-pork-input" type="checkbox">不吃猪肉</label>
+              <p>只在餐厅卡片上显示相关提醒，不排除餐厅，也不改变抽取概率。点餐时仍需确认配料。</p>
+            </section>
+            <section class="data-card">
               <div class="card-heading">
                 <h2>个人数据备份</h2>
                 <span id="history-count" class="badge badge-muted"></span>
@@ -142,6 +147,37 @@
           </div>
 
           <p id="data-message" class="inline-message" role="status" aria-live="polite"></p>
+          <section class="data-card">
+            <h2>待入库名称</h2>
+            <p>只知道店名也可以先记下来。名称保存在本机，暂不参与随机，也不会自动提交给维护者。</p>
+            <label class="form-field">
+              <span>单个或多个名称，用中文逗号、英文逗号或换行分隔</span>
+              <textarea id="pending-names-input" rows="3" placeholder="陈香贵，常去的面馆"></textarea>
+            </label>
+            <div class="stacked-actions">
+              <button id="preview-names-button" class="button button-secondary" type="button">预览名称</button>
+              <button id="confirm-names-button" class="button button-primary" type="button" disabled>确认加入待入库</button>
+            </div>
+            <div id="pending-preview" class="name-preview" aria-live="polite"></div>
+            <div id="pending-list"></div>
+          </section>
+          <details class="data-card">
+            <summary>个人正式新增</summary>
+            <p>用于已经核实位置、可堂食一份正餐并适合工作日午餐的门店。保存后加入本机随机池；只知道店名时，先放进待入库即可。</p>
+            <form id="personal-form">
+              <label class="form-field"><span>餐厅名称</span><input id="personal-name" type="text" required></label>
+              <label class="form-field"><span>范围</span><select id="personal-scope"><option value="primary">楼下：综合体内可达</option><option value="secondary">出去走走：步行不超过8分钟</option></select></label>
+              <label class="form-field"><span>可定位的楼层、铺位或街道地址</span><input id="personal-location" type="text" required></label>
+              <label id="personal-walk-field" class="form-field" hidden><span>已核实的单程步行分钟数</span><input id="personal-walk" type="number" min="1" max="8" step="1"></label>
+              <label class="form-field"><span>别名（可选，用逗号或换行分隔）</span><textarea id="personal-aliases" rows="2"></textarea></label>
+              <button class="button button-primary" type="submit">加入个人随机池</button>
+            </form>
+          </details>
+          <details class="data-card">
+            <summary>个人隐藏与恢复</summary>
+            <p>隐藏只影响这台设备的随机池和有效目录，保留已有午餐记录。共享餐厅资料由维护者统一修订。</p>
+            <div id="managed-restaurants"></div>
+          </details>
           <section class="data-footnote">
             <h2>共享目录说明</h2>
             <p>共享目录由部署版提供，并在站点更新时自动采用最新版。价格及步行时间均为参考值；闭店、搬迁和范围修订由维护者在代码仓库统一更新，不通过个人备份覆盖。</p>
@@ -170,6 +206,7 @@
                 <span class="mechanism-number">02</span>
                 <h3>执行冷却</h3>
                 <p>最近两条有效餐厅午餐记录中的店，当前权重为 0。跳过、未记录和周末不会占用这两顿。</p>
+                <p>自由文字也算一顿餐厅午餐；只有明确关联的记录会让对应餐厅进入冷却。</p>
               </article>
               <article class="mechanism-card">
                 <span class="mechanism-number">03</span>
@@ -268,8 +305,11 @@
         <div id="restaurant-fields">
           <label class="form-field">
             <span>餐厅</span>
-            <select id="record-restaurant" name="restaurant"></select>
+            <input id="record-restaurant" name="restaurant" type="text" autocomplete="off" aria-describedby="record-association" required placeholder="店名、简称或任意名称">
           </label>
+          <p id="record-association" class="directory-note" aria-live="polite"></p>
+          <button id="unlink-record-button" class="button button-quiet" type="button" hidden>仅保留名称，取消关联</button>
+          <div id="record-candidates" class="candidate-list" aria-label="餐厅候选"></div>
           <label class="form-field">
             <span>场景</span>
             <select id="record-source" name="source">

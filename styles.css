@@ -49,6 +49,8 @@ label {
 button:focus-visible,
 a:focus-visible,
 input:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
 select:focus-visible {
   outline: 3px solid rgba(233, 84, 44, 0.35);
   outline-offset: 3px;
@@ -365,6 +367,64 @@ h3 {
 .badge-muted {
   background: var(--paper-deep);
   color: var(--ink-soft);
+}
+
+.candidate-list {
+  display: grid;
+  gap: 8px;
+  max-height: 240px;
+  overflow-y: auto;
+  margin-bottom: 18px;
+}
+
+.candidate-button {
+  white-space: normal;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.management-item {
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+
+.management-item .button {
+  margin: 4px 4px 4px 0;
+}
+
+.check-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.check-field input {
+  width: 20px;
+  height: 20px;
+}
+
+.form-field textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font: inherit;
+  resize: vertical;
+}
+
+#view-data > .data-card {
+  margin-top: 20px;
+}
+
+.data-card summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.name-preview {
+  overflow-wrap: anywhere;
 }
 
 .compact-actions,
@@ -907,6 +967,9 @@ h3 {
 }
 
 .form-field input[type="date"],
+.form-field input[type="text"],
+.form-field input[type="number"],
+.form-field textarea,
 .form-field select {
   width: 100%;
   min-height: 48px;

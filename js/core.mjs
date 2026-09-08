@@ -483,6 +483,7 @@ export function pickRestaurant(restaurants, history, options = {}, random = Math
 
 export function createRestaurantRecord(restaurant, date, source = "manual", updatedAt = new Date().toISOString()) {
   assert(isObject(restaurant), "餐厅无效。");
+  assert(isNonEmptyString(restaurant.name), "请输入餐厅名称。");
   assert(isValidDateKey(date), "记录日期无效。");
   assert(isWeekday(date), "周末不创建午餐记录。");
   assert(VALID_RECORD_SOURCES.has(source), "记录来源无效。");
@@ -490,7 +491,7 @@ export function createRestaurantRecord(restaurant, date, source = "manual", upda
   return {
     date,
     status: "restaurant",
-    restaurant_id: restaurant.id,
+    restaurant_id: restaurant.id || null,
     restaurant_name: restaurant.name,
     source,
     updated_at: updatedAt
@@ -508,6 +509,20 @@ export function createSkippedRecord(date, reason = "other", updatedAt = new Date
     reason,
     updated_at: updatedAt
   };
+}
+
+export function parseRestaurantNames(text) {
+  assert(typeof text === "string", "名称输入必须是文本。");
+  return [...new Set(text.split(/[,，\r\n]+/).map((name) => name.trim()).filter(Boolean))];
+}
+
+export function findRestaurantCandidates(restaurants, text) {
+  const normalize = (value) => value.normalize("NFKC").toLowerCase().trim();
+  assert(typeof text === "string", "名称输入必须是文本。");
+  const query = normalize(text);
+  if (!query) return [];
+  return restaurants.filter((restaurant) => [restaurant.name, ...(restaurant.aliases || [])]
+    .some((name) => normalize(name).includes(query)));
 }
 
 export function upsertHistory(history, record) {

@@ -3,10 +3,12 @@ import {
   createInitialState,
   createRestaurantRecord,
   createSkippedRecord,
+  findRestaurantCandidates,
   getCandidatePool,
   isWeekday,
   localDateKey,
   migrateLegacyState,
+  parseRestaurantNames,
   pickWeighted,
   removeHistoryRecord,
   resolveEffectiveRestaurants,
@@ -23,11 +25,13 @@ const LEGACY_STORAGE_KEY = "lunch-picker.state.v1";
 export function createController(sharedDocument, initialState, {
   storage = globalThis.localStorage,
   random = Math.random,
-  today = localDateKey
+  today = localDateKey,
+  makePersonalId = () => "personal-" + globalThis.crypto.randomUUID()
 } = {}) {
   let state = validateState(initialState);
   let currentRestaurant = null;
   let sessionSeenIds = new Set();
+  let pendingPreview = null;
   const sharedRestaurantsDocument = validateRestaurantsDocument(sharedDocument);
   let runtimeRestaurants = resolveEffectiveRestaurants(sharedRestaurantsDocument, state);
 
@@ -110,9 +114,39 @@ export function createController(sharedDocument, initialState, {
       defaultRecordDate: previousWeekday(new Date(todayDate + "T12:00:00")),
       history: state.history.map(presentHistoryRecord),
       restaurants: activeRestaurants.map(presentRestaurant),
+      managedRestaurants: [
+        ...sharedRestaurantsDocument.restaurants.filter((restaurant) => restaurant.active !== false)
+          .map((restaurant) => ({ ...presentManagedRestaurant(restaurant), isPersonal: false,
+            isHidden: state.hidden_shared_restaurant_ids.includes(restaurant.id) })),
+        ...state.personal_restaurants.map((restaurant) => ({ ...presentManagedRestaurant(restaurant),
+          isPersonal: true, isHidden: restaurant.active === false }))
+      ],
+      pendingNames: state.pending_restaurant_names.map((name) => ({
+        name,
+        candidates: searchRestaurants(name),
+        historyCount: pendingHistory(name).length
+      })),
       sharedVerifiedAt: sharedRestaurantsDocument.verified_at,
       currentRestaurant: currentRestaurant ? presentRestaurant(currentRestaurant) : null
     };
+  }
+
+  function presentManagedRestaurant(restaurant) {
+    return { id: restaurant.id, name: restaurant.name, scope: restaurant.scope, location: restaurant.location };
+  }
+
+  function searchRestaurants(text) {
+    return findRestaurantCandidates(getFormalRestaurants(), text)
+      .map(presentManagedRestaurant);
+  }
+
+  function getFormalRestaurants() {
+    return [...sharedRestaurantsDocument.restaurants, ...state.personal_restaurants];
+  }
+
+  function pendingHistory(name) {
+    return state.history.filter((record) => record.status === "restaurant" && !record.restaurant_id
+      && record.restaurant_name.trim() === name);
   }
 
   function changeScope(scope) {
@@ -206,16 +240,14 @@ export function createController(sharedDocument, initialState, {
     let record;
     if (payload.status === "restaurant") {
       const selectedRestaurantId = payload.restaurantId || "";
-      let restaurant = runtimeRestaurants.find((item) => item.id === selectedRestaurantId);
-      if (!restaurant && payload.originalDate) {
-        const original = state.history.find((item) => item.date === payload.originalDate);
-        if (original && original.status === "restaurant"
-          && (original.restaurant_id || "") === selectedRestaurantId) {
-          restaurant = {
-            id: original.restaurant_id,
-            name: original.restaurant_name
-          };
-        }
+      const original = state.history.find((item) => item.date === payload.originalDate);
+      let restaurant = selectedRestaurantId
+        ? getFormalRestaurants().find((item) => item.id === selectedRestaurantId)
+        : { id: null, name: payload.restaurantName };
+      if (selectedRestaurantId && original?.status === "restaurant"
+        && original.restaurant_id === selectedRestaurantId
+        && original.restaurant_name === payload.restaurantName) {
+        restaurant = { id: selectedRestaurantId, name: original.restaurant_name };
       }
       if (!restaurant) {
         throw new Error("所选餐厅已不在当前目录中，请选择其他餐厅。");
@@ -234,8 +266,58 @@ export function createController(sharedDocument, initialState, {
     resetDrawSession();
     return {
       status: "saved",
+      unlinkedName: record.status === "restaurant" && !record.restaurant_id ? record.restaurant_name : null,
       viewModel: buildViewModel()
     };
+  }
+
+  function savePersonalChange(nextState) {
+    commitState(nextState);
+    resetDrawSession();
+    return { viewModel: buildViewModel() };
+  }
+
+  function queueNames(names) {
+    return savePersonalChange({ ...state,
+      pending_restaurant_names: [...state.pending_restaurant_names, ...names] });
+  }
+
+  function resolvePending(name, restaurantId, confirmed) {
+    if (!state.pending_restaurant_names.includes(name)) throw new Error("待入库名称已不存在。");
+    if (!searchRestaurants(name).some((restaurant) => restaurant.id === restaurantId)) {
+      throw new Error("请选择这个名称对应的当前候选。");
+    }
+    const records = pendingHistory(name);
+    if (!confirmed) return { status: "confirmation_required", historyCount: records.length };
+    const dates = new Set(records.map((record) => record.date));
+    return savePersonalChange({ ...state,
+      pending_restaurant_names: state.pending_restaurant_names.filter((item) => item !== name),
+      history: state.history.map((record) => dates.has(record.date)
+        ? { ...record, restaurant_id: restaurantId, updated_at: new Date().toISOString() } : record)
+    });
+  }
+
+  function setRestaurantHidden(restaurantId, hidden) {
+    const personal = state.personal_restaurants.find((restaurant) => restaurant.id === restaurantId);
+    if (personal) {
+      return savePersonalChange({ ...state, personal_restaurants: state.personal_restaurants
+        .map((restaurant) => restaurant.id === restaurantId ? { ...restaurant, active: !hidden } : restaurant) });
+    }
+    if (!sharedRestaurantsDocument.restaurants.some((restaurant) => restaurant.id === restaurantId)) {
+      throw new Error("餐厅已不在当前目录中。");
+    }
+    return savePersonalChange({ ...state, hidden_shared_restaurant_ids: hidden
+      ? [...state.hidden_shared_restaurant_ids, restaurantId]
+      : state.hidden_shared_restaurant_ids.filter((id) => id !== restaurantId) });
+  }
+
+  function addPersonalRestaurant(payload) {
+    const restaurant = {
+      id: makePersonalId(), name: payload.name.trim(), scope: payload.scope,
+      location: payload.location.trim(), aliases: parseRestaurantNames(payload.aliases),
+      ...(payload.scope === "secondary" ? { walking_minutes: payload.walkingMinutes } : {})
+    };
+    return savePersonalChange({ ...state, personal_restaurants: [...state.personal_restaurants, restaurant] });
   }
 
   function deleteRecord(date) {
@@ -265,6 +347,7 @@ export function createController(sharedDocument, initialState, {
     const importedState = validateBackupDocument(document);
     commitState(importedState);
     resetDrawSession();
+    pendingPreview = null;
     return {
       status: "imported",
       viewModel: buildViewModel()
@@ -289,6 +372,34 @@ export function createController(sharedDocument, initialState, {
         return saveRecord(intent);
       case "deleteRecord":
         return deleteRecord(intent.date);
+      case "searchRestaurants":
+        return { candidates: searchRestaurants(intent.text) };
+      case "queueName":
+        return queueNames([intent.name]);
+      case "previewPendingNames": {
+        const names = parseRestaurantNames(intent.text);
+        if (!names.length) throw new Error("请先输入至少一个名称。");
+        pendingPreview = names;
+        return { names: [...names], existingCount: names.filter((name) => state.pending_restaurant_names.includes(name)).length };
+      }
+      case "confirmPendingNames": {
+        if (!pendingPreview) throw new Error("请先预览名称列表。");
+        const result = queueNames(pendingPreview);
+        pendingPreview = null;
+        return result;
+      }
+      case "removePendingName":
+        return savePersonalChange({ ...state,
+          pending_restaurant_names: state.pending_restaurant_names.filter((name) => name !== intent.name) });
+      case "resolvePending":
+        return resolvePending(intent.name, intent.restaurantId, intent.confirmed);
+      case "setRestaurantHidden":
+        return setRestaurantHidden(intent.restaurantId, intent.hidden);
+      case "addPersonalRestaurant":
+        return addPersonalRestaurant(intent);
+      case "setAvoidPork":
+        commitState({ ...state, dietary_preferences: { avoid_pork: intent.value } });
+        return { viewModel: buildViewModel() };
       case "previewBackup":
         return previewBackup(intent.document);
       case "importBackup":

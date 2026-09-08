@@ -306,6 +306,27 @@ test("页面 id 唯一，应用缓存的元素都存在于 HTML", () => {
   cachedIds.forEach((id) => assert.ok(htmlIds.includes(id), "HTML 缺少 #" + id));
 });
 
+test("正式餐厅最低字段不可缺失，副范围步行时间只接受1至8的整数", () => {
+  const minimal = { schema_version: 1, type: "restaurants", restaurants: [
+    { id: "minimal", name: "测试店", scope: "primary", location: "LG01" }
+  ] };
+  for (const field of ["id", "name", "scope", "location"]) {
+    const invalid = structuredClone(minimal);
+    delete invalid.restaurants[0][field];
+    assert.throws(() => validateRestaurantsDocument(invalid), new RegExp(field));
+  }
+  for (const minutes of [0, 9, 1.5, "8", null]) {
+    const invalid = structuredClone(minimal);
+    Object.assign(invalid.restaurants[0], { scope: "secondary", walking_minutes: minutes });
+    assert.throws(() => validateRestaurantsDocument(invalid), /walking_minutes|1–8/);
+  }
+  for (const minutes of [1, 8]) {
+    const valid = structuredClone(minimal);
+    Object.assign(valid.restaurants[0], { scope: "secondary", walking_minutes: minutes });
+    assert.equal(validateRestaurantsDocument(valid).restaurants.length, 1);
+  }
+});
+
 test("页面只有个人备份入口，推荐菜字段不参与展示", () => {
   assert.match(html, /id="export-backup-button"/);
   assert.match(html, /id="import-backup-input"/);
@@ -340,6 +361,15 @@ test("controller 与 view 通过固定意图和普通 view model 连接", () => 
     "confirmRestaurant",
     "saveRecord",
     "deleteRecord",
+    "searchRestaurants",
+    "queueName",
+    "previewPendingNames",
+    "confirmPendingNames",
+    "removePendingName",
+    "resolvePending",
+    "setRestaurantHidden",
+    "addPersonalRestaurant",
+    "setAvoidPork",
     "previewBackup",
     "importBackup",
     "exportBackup"
@@ -349,6 +379,7 @@ test("controller 与 view 通过固定意图和普通 view model 连接", () => 
     date: "2026-09-01",
     status: "restaurant",
     restaurantId: "minimal-shop",
+    restaurantName: "最小餐厅",
     source: "manual",
     reason: "other",
     confirmed: false
@@ -392,6 +423,8 @@ test("controller 与 view 通过固定意图和普通 view model 连接", () => 
     defaultRecordDate: "2026-09-01",
     history: [historyModel],
     restaurants: [restaurantModel],
+    managedRestaurants: [],
+    pendingNames: [],
     sharedVerifiedAt: null,
     currentRestaurant: restaurantModel
   };
