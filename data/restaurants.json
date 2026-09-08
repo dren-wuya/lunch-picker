@@ -32,6 +32,8 @@
       "map_query": "超级泰泰式麻辣烫 陆家嘴中心店",
       "active": true,
       "source_urls": [
+        "https://you.ctrip.com/food/ctripyouyoustar2/121702355.html",
+        "https://www.dianping.com/shop/k6780SM8AcoSemYw/photos/tag-%E7%8E%AF%E5%A2%83-%E5%A4%A7%E5%A0%82",
         "https://maps.apple.com/?q=%E8%B6%85%E7%BA%A7%E6%B3%B0%E6%B3%B0%E5%BC%8F%E9%BA%BB%E8%BE%A3%E7%83%AB%20%E9%99%86%E5%AE%B6%E5%98%B4%E4%B8%AD%E5%BF%83"
       ]
     },
@@ -48,6 +50,7 @@
       "map_query": "董小婉 陆家嘴中心店",
       "active": true,
       "source_urls": [
+        "https://maps.apple.com/place?auid=1118678190673067&lsp=57879",
         "https://maps.apple.com/?q=%E8%91%A3%E5%B0%8F%E5%A9%89%20%E9%99%86%E5%AE%B6%E5%98%B4%E4%B8%AD%E5%BF%83"
       ]
     },
@@ -80,6 +83,7 @@
       "map_query": "必胜客 陆家嘴中心店",
       "active": true,
       "source_urls": [
+        "https://gs.ctrip.com/html5/you/foods/fooddetail/2/78615474.html",
         "https://maps.apple.com/?q=%E5%BF%85%E8%83%9C%E5%AE%A2%20%E9%99%86%E5%AE%B6%E5%98%B4%E4%B8%AD%E5%BF%83"
       ]
     },
@@ -88,7 +92,7 @@
       "name": "肯德基",
       "cuisine": "西式快餐",
       "scope": "primary",
-      "location": "L+MALL LG1-01",
+      "location": "L+MALL LG01B，近商城路地铁站出入口",
       "walking_minutes": null,
       "price_per_person": 40,
       "pork_free_hint": "可选鸡肉套餐，点餐时确认配料。",
@@ -96,6 +100,7 @@
       "map_query": "肯德基 陆家嘴中心店",
       "active": true,
       "source_urls": [
+        "https://you.ctrip.com/food/2/25041823.html",
         "https://maps.apple.com/?q=%E8%82%AF%E5%BE%B7%E5%9F%BA%20%E9%99%86%E5%AE%B6%E5%98%B4%E4%B8%AD%E5%BF%83"
       ]
     },
@@ -112,7 +117,19 @@
       "map_query": "Toris 陆家嘴中心L+Mall店",
       "active": true,
       "source_urls": [
+        "https://www.trip.com/restaurant/china/shanghai/detail/restaurant-136384548/",
         "https://maps.apple.com/place?auid=1118673339591876&lsp=57879"
+      ]
+    },
+    {
+      "id": "chen-xiang-gui",
+      "name": "陈香贵·兰州牛肉面",
+      "aliases": ["陈香贵", "陳香貴"],
+      "cuisine": "牛肉面与西北简餐",
+      "scope": "primary",
+      "location": "L+MALL LG01A，近商城路地铁站4号口",
+      "source_urls": [
+        "https://hk.trip.com/restaurant/china/shanghai/detail/restaurant-134847985/"
       ]
     },
     {

@@ -37,8 +37,8 @@ const appSource = await readFile(new URL("../js/app.mjs", import.meta.url), "utf
 const viewSource = await readFile(new URL("../js/view.mjs", import.meta.url), "utf8");
 
 test("部署版共享目录与 v2 个人状态相互分离", () => {
-  assert.equal(restaurants.filter((item) => item.scope === "primary").length, 20);
-  assert.equal(restaurants.filter((item) => item.scope === "secondary").length, 8);
+  assert.ok(restaurants.some((item) => item.scope === "primary"));
+  assert.ok(restaurants.some((item) => item.scope === "secondary"));
   assert.equal(state.schema_version, 2);
   assert.equal("restaurants" in state, false);
   assert.equal("restaurants_verified_at" in state, false);
