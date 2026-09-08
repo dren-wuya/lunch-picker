@@ -28,7 +28,6 @@ html {
 }
 
 body {
-  min-width: 320px;
   margin: 0;
   background: var(--paper);
   color: var(--ink);
@@ -153,6 +152,10 @@ h1 {
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1.06;
+}
+
+#today-title {
+  font-size: clamp(34px, 8vw, 68px);
 }
 
 h2 {
@@ -471,6 +474,7 @@ h3 {
 
 .result-card {
   position: relative;
+  isolation: isolate;
   overflow: hidden;
   padding: 28px;
   border-radius: var(--radius-large);
@@ -480,6 +484,7 @@ h3 {
 
 .result-card::after {
   position: absolute;
+  z-index: -1;
   right: -28px;
   bottom: -55px;
   width: 145px;
@@ -550,6 +555,8 @@ h3 {
 
 .result-actions .button {
   flex: 1;
+  padding-inline: 8px;
+  white-space: nowrap;
 }
 
 .section-heading {
@@ -1018,30 +1025,8 @@ h3 {
     min-height: 96px;
   }
 
-  .today-grid {
-    grid-template-columns: minmax(0, 1.65fr) minmax(290px, 0.75fr);
-    gap: 54px;
-    align-items: end;
-  }
-
   .view {
     padding-top: 66px;
-  }
-
-  .decision-panel {
-    grid-column: 1;
-    grid-row: 1;
-    padding-top: 0;
-  }
-
-  .today-side {
-    grid-column: 2;
-    grid-row: 1;
-  }
-
-  .result-section {
-    grid-column: 1 / -1;
-    grid-row: 2;
   }
 
   .scope-picker {
@@ -1071,6 +1056,30 @@ h3 {
   .boundary-grid,
   .restaurant-directory {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .today-grid {
+    grid-template-columns: minmax(0, 1.65fr) minmax(290px, 0.75fr);
+    gap: 54px;
+    align-items: end;
+  }
+
+  .decision-panel {
+    grid-column: 1;
+    grid-row: 1;
+    padding-top: 0;
+  }
+
+  .today-side {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .result-section {
+    grid-column: 1 / -1;
+    grid-row: 2;
   }
 }
 

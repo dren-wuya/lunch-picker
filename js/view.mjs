@@ -619,6 +619,7 @@ export function createView(dispatch) {
     const restaurant = viewModel.currentRestaurant;
     if (!restaurant) {
       elements["result-section"].hidden = true;
+      setMessage(elements["draw-message"], "");
       return;
     }
 
