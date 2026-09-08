@@ -59,7 +59,7 @@
       "name": "CHARLIE'S 粉红汉堡",
       "cuisine": "汉堡与西式简餐",
       "scope": "primary",
-      "location": "L+MALL MG10",
+      "location": "L+MALL LG层 MG10",
       "walking_minutes": null,
       "price_per_person": 58,
       "pork_free_hint": "可选牛肉或鸡肉汉堡，点餐时确认酱料。",
@@ -67,6 +67,7 @@
       "map_query": "CHARLIE'S 粉红汉堡 陆家嘴中心店",
       "active": true,
       "source_urls": [
+        "https://you.ctrip.com/food/shanghai2/18547298-dianping.html",
         "https://www.smartshanghai.com/venue/21553/charlies_l_mall"
       ]
     },
