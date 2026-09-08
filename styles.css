@@ -465,6 +465,7 @@ h3 {
 
 .result-section {
   margin-top: 34px;
+  scroll-margin-bottom: calc(94px + var(--safe-bottom));
   animation: reveal 260ms ease-out both;
 }
 

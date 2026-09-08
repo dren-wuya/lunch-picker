@@ -340,7 +340,7 @@ test("第一版页面不提供地图入口", () => {
 });
 
 test("GitHub Pages 所需资源全部使用仓库内相对路径", () => {
-  assert.match(html, /href="\.\/styles\.css"/);
+  assert.match(html, /href="\.\/styles\.css(?:\?[^"\s]*)?"/);
   assert.match(html, /src="\.\/js\/app\.mjs"/);
   assert.match(appSource, /fetch\("\.\/data\/restaurants\.json"/);
 });

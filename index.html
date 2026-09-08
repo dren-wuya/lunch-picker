@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#f3efe5">
     <meta name="description" content="陆家嘴中心 L+MALL 工作日午餐随机选择器">
     <title>今天吃什么</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./styles.css?v=20260908">
   </head>
   <body>
     <div class="app-shell">
@@ -273,7 +273,7 @@
       </nav>
     </div>
 
-    <dialog id="record-dialog" class="record-dialog">
+    <dialog id="record-dialog" class="record-dialog" aria-labelledby="record-dialog-title">
       <form id="record-form" method="dialog">
         <div class="dialog-heading">
           <div>
@@ -334,6 +334,20 @@
           <span class="dialog-spacer"></span>
           <button id="cancel-dialog-button" class="button button-quiet" type="button">取消</button>
           <button class="button button-primary" type="submit">保存</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="action-dialog" class="record-dialog" aria-labelledby="action-dialog-title" aria-describedby="action-dialog-message">
+      <form method="dialog">
+        <div class="dialog-heading">
+          <h2 id="action-dialog-title">请确认</h2>
+        </div>
+        <p id="action-dialog-message" class="directory-note name-preview"></p>
+        <div class="dialog-actions">
+          <span class="dialog-spacer"></span>
+          <button class="button button-quiet" type="submit" value="cancel" autofocus>取消</button>
+          <button id="action-dialog-confirm" class="button button-primary" type="submit" value="confirm">确认</button>
         </div>
       </form>
     </dialog>

@@ -347,6 +347,10 @@ export function createView(dispatch) {
     "export-backup-button",
     "import-backup-input",
     "data-message",
+    "action-dialog",
+    "action-dialog-title",
+    "action-dialog-message",
+    "action-dialog-confirm",
     "record-dialog",
     "record-form",
     "record-dialog-title",
@@ -389,6 +393,18 @@ export function createView(dispatch) {
   function setMessage(element, message, isError = false) {
     element.textContent = message;
     element.style.color = isError ? "var(--danger)" : "";
+  }
+
+  function confirmAction(message, label, title = "请确认") {
+    const dialog = elements["action-dialog"];
+    elements["action-dialog-title"].textContent = title;
+    elements["action-dialog-message"].textContent = message;
+    elements["action-dialog-confirm"].textContent = label;
+    dialog.returnValue = "";
+    return new Promise((resolve) => {
+      dialog.addEventListener("close", () => resolve(dialog.returnValue === "confirm"), { once: true });
+      dialog.showModal();
+    });
   }
 
   function renderTodayStatus() {
@@ -566,10 +582,10 @@ export function createView(dispatch) {
         const button = makeElement("button", "button button-quiet candidate-button",
           "关联到 " + candidate.name + " · " + candidate.location);
         button.type = "button";
-        button.addEventListener("click", () => {
-          if (!window.confirm("将“" + pending.name + "”的 " + pending.historyCount
+        button.addEventListener("click", async () => {
+          if (!await confirmAction("将“" + pending.name + "”的 " + pending.historyCount
             + " 条未关联记录关联到“" + candidate.name + "”（" + candidate.location
-            + "），保留原名称快照，并从待入库移除。是否继续？")) return;
+            + "），保留原名称快照，并从待入库移除。是否继续？", "确认关联", "关联餐厅")) return;
           runDataIntent("resolvePending", { name: pending.name, restaurantId: candidate.id, confirmed: true }, "关联已保存。");
         });
         item.append(button);
@@ -784,14 +800,14 @@ export function createView(dispatch) {
     }
   }
 
-  function handleConfirmRestaurant() {
+  async function handleConfirmRestaurant() {
     if (!viewModel) {
       return;
     }
     try {
       let result = dispatch(createViewIntent("confirmRestaurant", { confirmed: false }));
       if (result.status === "confirmation_required") {
-        if (!window.confirm("今天已有记录，是否用这家餐厅替换？")) {
+        if (!await confirmAction("今天已有记录，是否用这家餐厅替换？", "替换记录")) {
           return;
         }
         result = dispatch(createViewIntent("confirmRestaurant", { confirmed: true }));
@@ -805,7 +821,7 @@ export function createView(dispatch) {
     }
   }
 
-  function saveRecordFromForm(event) {
+  async function saveRecordFromForm(event) {
     event.preventDefault();
     if (!viewModel) {
       return;
@@ -826,7 +842,7 @@ export function createView(dispatch) {
       };
       let result = dispatch(createViewIntent("saveRecord", payload));
       if (result.status === "confirmation_required") {
-        if (!window.confirm("这个工作日已有记录，是否替换？")) {
+        if (!await confirmAction("这个工作日已有记录，是否替换？", "替换记录")) {
           return;
         }
         result = dispatch(createViewIntent("saveRecord", { ...payload, confirmed: true }));
@@ -834,8 +850,8 @@ export function createView(dispatch) {
       applyResult(result);
       closeRecordDialog();
       setMessage(elements["draw-message"], "");
-      if (result.unlinkedName && window.confirm("午餐已保存为“" + result.unlinkedName
-        + "”。是否把这个名称加入本地待入库？它不会参与随机，也不会自动提交。")) {
+      if (result.unlinkedName && await confirmAction("午餐已保存为“" + result.unlinkedName
+        + "”。是否把这个名称加入本地待入库？它不会参与随机，也不会自动提交。", "加入待入库", "午餐已保存")) {
         runDataIntent("queueName", { name: result.unlinkedName }, "名称已加入本地待入库。");
         showView("data");
       }
@@ -844,8 +860,9 @@ export function createView(dispatch) {
     }
   }
 
-  function deleteEditingRecord() {
-    if (!viewModel || !editingDate || !window.confirm("清除这一天的午餐记录？清除后将恢复为未记录。")) {
+  async function deleteEditingRecord() {
+    if (!viewModel || !editingDate
+      || !await confirmAction("清除这一天的午餐记录？清除后将恢复为未记录。", "清除记录")) {
       return;
     }
     try {
@@ -870,7 +887,7 @@ export function createView(dispatch) {
         + preview.hiddenSharedCount + " 条共享隐藏项、"
         + preview.pendingNameCount + " 个待入库名称和 "
         + preview.historyCount + " 条历史整体替换当前个人数据；部署版共享目录不会改变。是否继续？";
-      if (!window.confirm(message)) {
+      if (!await confirmAction(message, "导入并替换", "导入个人备份")) {
         setMessage(elements["data-message"], "已取消导入，当前数据没有变化。");
         return;
       }
