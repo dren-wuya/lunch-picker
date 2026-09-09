@@ -263,6 +263,16 @@
       "source_urls": ["https://www.dianping.com/shop/l1BrnFuAO29bVrwg"]
     },
     {
+      "id": "dia-tuan-tuan",
+      "name": "嗲团团·手作饭团",
+      "aliases": ["嗲团团"],
+      "cuisine": "饭团与鸡排简餐",
+      "scope": "primary",
+      "location": "L+MALL LG层 L+食集",
+      "price_per_person": 19,
+      "source_urls": ["https://www.dianping.com/shop/jVcHV2d1u6qBEYBy", "https://t.dianping.com/deal/1472183907"]
+    },
+    {
       "id": "heiseiya",
       "name": "平成屋",
       "cuisine": "日式居酒屋简餐",
@@ -331,6 +341,16 @@
       "location": "L+MALL 5F 515FG",
       "price_per_person": 61,
       "source_urls": ["https://www.dianping.com/shop/jUZNcio1rwZFcUsL"]
+    },
+    {
+      "id": "tuna-maki",
+      "name": "Tuna maki寿司",
+      "aliases": ["Tuna maki"],
+      "cuisine": "寿司与日式饭类",
+      "scope": "primary",
+      "location": "L+MALL 5F，电梯附近",
+      "price_per_person": 128,
+      "source_urls": ["https://www.dianping.com/shop/k9YD3P2keUaF3TYX", "https://t.dianping.com/deal/1175003327"]
     },
     {
       "id": "tian-la",
