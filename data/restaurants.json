@@ -273,8 +273,9 @@
       "pork_free_hint": "可选虾仁蛋包饭等主食，点餐时确认。",
       "recommended_dishes": ["虾仁蛋包饭", "鸡肉定食"],
       "map_query": "平成屋 陆家嘴中心店",
-      "active": true,
+      "active": false,
       "source_urls": [
+        "https://m.dianping.com/shop/1786799906",
         "https://hk.trip.com/restaurant/china/shanghai/detail/restaurant-121701194/"
       ]
     },
@@ -283,7 +284,7 @@
       "name": "南惹野·东南亚 bistro",
       "cuisine": "东南亚菜",
       "scope": "primary",
-      "location": "L+MALL 1F 沿街餐饮区",
+      "location": "L+MALL 1F 美食内街，喜茶隔壁",
       "walking_minutes": null,
       "price_per_person": 100,
       "pork_free_hint": "可选海南鸡饭等鸡肉或海鲜主食。",
@@ -291,6 +292,7 @@
       "map_query": "南惹野 东南亚bistro 陆家嘴中心",
       "active": true,
       "source_urls": [
+        "https://hk.trip.com/restaurant/china/shanghai/detail/restaurant-153155884/",
         "https://www.sh.chinanews.com.cn/chanjing/2025-10-01/140722.shtml"
       ]
     },
@@ -299,16 +301,36 @@
       "name": "孤独的寿喜烧",
       "cuisine": "单人寿喜烧",
       "scope": "primary",
-      "location": "L+MALL 1F 沿街餐饮区",
+      "location": "L+MALL 1F 内街",
       "walking_minutes": null,
-      "price_per_person": 84,
+      "price_per_person": 83,
       "pork_free_hint": "可选牛肉寿喜烧套餐。",
       "recommended_dishes": ["牛肉寿喜烧套餐", "蔬菜拼盘"],
       "map_query": "孤独的寿喜烧 陆家嘴中心",
       "active": true,
       "source_urls": [
+        "https://www.dianping.com/shop/H4nDTshyuySKuO3i",
         "https://www.sh.chinanews.com.cn/chanjing/2025-10-01/140722.shtml"
       ]
+    },
+    {
+      "id": "coco-ichibanya",
+      "name": "COCO壱番屋",
+      "cuisine": "日式咖喱饭",
+      "scope": "primary",
+      "location": "L+MALL 5F 515E",
+      "price_per_person": 52,
+      "source_urls": ["https://www.dianping.com/shop/k9Af8imAay6Bo11S"]
+    },
+    {
+      "id": "guo-qi",
+      "name": "锅气·湖南饭店",
+      "aliases": ["锅气"],
+      "cuisine": "湘菜与家常小炒",
+      "scope": "primary",
+      "location": "L+MALL 5F 515FG",
+      "price_per_person": 61,
+      "source_urls": ["https://www.dianping.com/shop/jUZNcio1rwZFcUsL"]
     },
     {
       "id": "tian-la",
@@ -317,12 +339,13 @@
       "scope": "primary",
       "location": "L+MALL 6F 611",
       "walking_minutes": null,
-      "price_per_person": 104,
+      "price_per_person": 115,
       "pork_free_hint": "可选鱼、鸡或牛肉菜品，点餐时确认。",
       "recommended_dishes": ["水煮鱼", "口水鸡", "酸汤肥牛"],
       "map_query": "天辣 陆家嘴中心店",
       "active": true,
       "source_urls": [
+        "https://www.dianping.com/shop/k1mGfnSQSbnCQkeg",
         "https://maps.apple.com/?q=%E5%A4%A9%E8%BE%A3%20%E9%99%86%E5%AE%B6%E5%98%B4%E4%B8%AD%E5%BF%83"
       ]
     },
@@ -331,14 +354,15 @@
       "name": "闽叔福建菜",
       "cuisine": "福建菜",
       "scope": "primary",
-      "location": "L+MALL 7F 餐饮区",
+      "location": "L+MALL 7F 716",
       "walking_minutes": null,
-      "price_per_person": 104,
+      "price_per_person": 97,
       "pork_free_hint": "可选沙茶牛腩、海鲜或素菜配饭。",
       "recommended_dishes": ["沙茶牛腩", "海鲜汤饭", "姜母鸭"],
       "map_query": "闽叔福建菜 陆家嘴中心L+Mall店",
       "active": true,
       "source_urls": [
+        "https://www.dianping.com/shop/k8akhjpGmuRgOXme",
         "https://maps.apple.com/place?_provider=57879&place-id=H2710I3F98FAC2FC8A7"
       ]
     },
@@ -353,8 +377,9 @@
       "pork_free_hint": "可选虾仁水饺、鲜虾泡饭或鸡肉菜品，点餐时确认馅料。",
       "recommended_dishes": ["鲜虾泡饭", "虾仁水饺", "鸡肉菜品"],
       "map_query": "喜顶上品海胆水饺 陆家嘴中心店",
-      "active": true,
+      "active": false,
       "source_urls": [
+        "https://www.dianping.com/shop/1498696079",
         "https://www.zaoseo.com/place/1546607"
       ]
     },
@@ -365,12 +390,13 @@
       "scope": "primary",
       "location": "L+MALL 8F 807",
       "walking_minutes": null,
-      "price_per_person": 100,
+      "price_per_person": 110,
       "pork_free_hint": "可选鸡肉、牛肉或素食主食。",
       "recommended_dishes": ["披萨", "奶油鸡", "牛排"],
       "map_query": "OTF加州餐厅 陆家嘴中心店",
       "active": true,
       "source_urls": [
+        "https://www.dianping.com/shop/l1fElxvFx8x0Gy3O",
         "https://m.winshang.com/news730053.html"
       ]
     },
@@ -385,8 +411,9 @@
       "pork_free_hint": "午市可选鸡肉、牛肉或海鲜套餐。",
       "recommended_dishes": ["午市意面", "牛排", "海鲜主食"],
       "map_query": "斯比特花园 陆家嘴中心店",
-      "active": true,
+      "active": false,
       "source_urls": [
+        "https://www.dianping.com/shop/l19BDZu59BbaF02G",
         "https://maps.apple.com/?q=%E6%96%AF%E6%AF%94%E7%89%B9%E8%8A%B1%E5%9B%AD%20%E9%99%86%E5%AE%B6%E5%98%B4%E4%B8%AD%E5%BF%83"
       ]
     },
@@ -401,8 +428,9 @@
       "pork_free_hint": "可选鸡、鱼、牛肉或素菜配饭。",
       "recommended_dishes": ["豌豆鱼", "麻辣鱼片", "鸡肉菜品"],
       "map_query": "柴门饭儿 陆家嘴中心店",
-      "active": true,
+      "active": false,
       "source_urls": [
+        "https://m.dianping.com/shop/122876116",
         "https://maps.apple.com/?q=%E6%9F%B4%E9%97%A8%E9%A5%AD%E5%84%BF%20%E9%99%86%E5%AE%B6%E5%98%B4%E4%B8%AD%E5%BF%83"
       ]
     },
@@ -419,22 +447,34 @@
       "map_query": "蘭心餐厅 陆家嘴中心店",
       "active": true,
       "source_urls": [
+        "https://www.dianping.com/shop/H83pT4gz660xPgHT",
         "https://maps.apple.com/?q=%E8%98%AD%E5%BF%83%E9%A4%90%E5%8E%85%20%E9%99%86%E5%AE%B6%E5%98%B4%E4%B8%AD%E5%BF%83"
       ]
+    },
+    {
+      "id": "tahar",
+      "name": "塔哈尔·毡房行",
+      "aliases": ["塔哈尔"],
+      "cuisine": "新疆菜与面饭",
+      "scope": "primary",
+      "location": "L+MALL 8F 817",
+      "price_per_person": 94,
+      "source_urls": ["https://www.dianping.com/shop/G1g0ZVn4alo9Xsyq"]
     },
     {
       "id": "tim-ho-wan",
       "name": "添好运",
       "cuisine": "港式点心",
       "scope": "primary",
-      "location": "L+MALL 8F 餐饮区",
+      "location": "L+MALL 8F 五号电梯旁",
       "walking_minutes": null,
-      "price_per_person": 107,
+      "price_per_person": 87,
       "pork_free_hint": "可用虾饺、鸡肉、牛肉与饭类组合完整午餐。",
       "recommended_dishes": ["鲜虾饺", "鸡肉饭", "牛肉肠粉"],
       "map_query": "添好运 陆家嘴中心店",
       "active": true,
       "source_urls": [
+        "https://www.dianping.com/shop/H2sozrWMGoa3ahYq",
         "https://m.winshang.com/news693675.html"
       ]
     },
@@ -449,8 +489,9 @@
       "pork_free_hint": "可选鱼、鸡、牛肉或素菜，点餐时确认。",
       "recommended_dishes": ["水煮鱼", "口水鸡", "酸汤肥牛"],
       "map_query": "孔雀川菜 陆家嘴中心店",
-      "active": true,
+      "active": false,
       "source_urls": [
+        "https://www.dianping.com/shop/FixMiPcV1lUSoibs",
         "https://maps.apple.com/?q=%E5%AD%94%E9%9B%80%E5%B7%9D%E8%8F%9C%20%E9%99%86%E5%AE%B6%E5%98%B4%E4%B8%AD%E5%BF%83"
       ]
     },
@@ -467,6 +508,7 @@
       "map_query": "港丽餐厅 陆家嘴中心店",
       "active": true,
       "source_urls": [
+        "https://www.dianping.com/shop/H3CVAm2PTUSgjU8F",
         "https://maps.apple.com/?q=%E6%B8%AF%E4%B8%BD%E9%A4%90%E5%8E%85%20%E9%99%86%E5%AE%B6%E5%98%B4%E4%B8%AD%E5%BF%83"
       ]
     },
