@@ -134,6 +134,86 @@
       ]
     },
     {
+      "id": "shanlin-yeguo",
+      "name": "山林野果·云南食集",
+      "aliases": ["山林野果"],
+      "cuisine": "云南米线与铜锅饭",
+      "scope": "primary",
+      "location": "L+MALL LG层 L+食集 MG19",
+      "price_per_person": 44,
+      "source_urls": ["https://www.dianping.com/shop/G6OFxOjfkhknKb6z"]
+    },
+    {
+      "id": "shi-er-xiang",
+      "name": "十二湘·湖南山野小炒",
+      "aliases": ["十二湘", "十二湘·现炒下饭菜"],
+      "cuisine": "湘菜与米饭套餐",
+      "scope": "primary",
+      "location": "L+MALL LG层 L+食集 MG17-18",
+      "price_per_person": 50,
+      "source_urls": ["https://www.dianping.com/shop/GaaTZ8pdkGnvLUGq"]
+    },
+    {
+      "id": "banmi-shao",
+      "name": "坂米烧·日式肉酱饭",
+      "aliases": ["坂米烧"],
+      "cuisine": "日式丼饭",
+      "scope": "primary",
+      "location": "L+MALL LG28",
+      "price_per_person": 50,
+      "source_urls": ["https://www.dianping.com/shop/k8Zwf96lyIZU8hMR"]
+    },
+    {
+      "id": "jiao-guo-guo",
+      "name": "椒锅锅·麻辣香锅·干锅小馆",
+      "aliases": ["椒锅锅"],
+      "cuisine": "麻辣香锅与干锅",
+      "scope": "primary",
+      "location": "L+MALL LG层，原青爱亭韩料铺位",
+      "price_per_person": 40,
+      "source_urls": ["https://www.dianping.com/shop/k3dZ5DrKC80LsTxu"]
+    },
+    {
+      "id": "wang-chunchun",
+      "name": "王春春鸡汤饭",
+      "aliases": ["王春春"],
+      "cuisine": "鸡汤饭与米线",
+      "scope": "primary",
+      "location": "L+MALL LG层 L+食集 MG21",
+      "price_per_person": 29,
+      "source_urls": ["https://www.dianping.com/shop/k4Qzdkx8i3XHAjX4"]
+    },
+    {
+      "id": "dr-curry",
+      "name": "伽喱博士 Dr.CURRY咖喱饭",
+      "aliases": ["伽喱博士", "咖喱博士", "Dr.CURRY"],
+      "cuisine": "日式咖喱饭",
+      "scope": "primary",
+      "location": "L+MALL LG层 MG11，Peet's Coffee旁",
+      "price_per_person": 48,
+      "source_urls": ["https://www.dianping.com/shop/G5CoV85YRxgJgnqb"]
+    },
+    {
+      "id": "san-tiao-lu-888",
+      "name": "三條路888槟城福建面",
+      "aliases": ["三條路888", "三条路888"],
+      "cuisine": "槟城虾面与东南亚饭类",
+      "scope": "primary",
+      "location": "L+MALL LG层 L+食集 MG20",
+      "price_per_person": 41,
+      "source_urls": ["https://www.dianping.com/shop/H6h4IqeZ2Iu4O25f"]
+    },
+    {
+      "id": "phillys",
+      "name": "Phillys费乐斯·现烤三明治·潜艇堡",
+      "aliases": ["Phillys", "费乐斯"],
+      "cuisine": "三明治与西式简餐",
+      "scope": "primary",
+      "location": "L+MALL LG层 MG01，堂食座位较少",
+      "price_per_person": 31,
+      "source_urls": ["https://www.dianping.com/shop/l8ETT9sdGopJm1bG"]
+    },
+    {
       "id": "heiseiya",
       "name": "平成屋",
       "cuisine": "日式居酒屋简餐",
