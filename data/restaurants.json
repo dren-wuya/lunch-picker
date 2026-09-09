@@ -10,12 +10,13 @@
       "scope": "primary",
       "location": "L+MALL LG39",
       "walking_minutes": null,
-      "price_per_person": 60,
+      "price_per_person": 65,
       "pork_free_hint": "可选牛肉面、鸡饭等主食，点餐时确认配料。",
       "recommended_dishes": ["沙茶牛肉面", "鸡扒饭"],
       "map_query": "敏华冰厅 陆家嘴中心店",
       "active": true,
       "source_urls": [
+        "https://www.dianping.com/shop/l2hiyu1BwJofvOSu",
         "https://www.taihing.com/?lang=3&route=mainland"
       ]
     },
@@ -30,8 +31,9 @@
       "pork_free_hint": "可自选非猪肉食材，点餐时确认汤底。",
       "recommended_dishes": ["泰式酸辣汤底自选", "牛肉与蔬菜自选"],
       "map_query": "超级泰泰式麻辣烫 陆家嘴中心店",
-      "active": true,
+      "active": false,
       "source_urls": [
+        "https://www.dianping.com/shop/k6780SM8AcoSemYw",
         "https://you.ctrip.com/food/ctripyouyoustar2/121702355.html",
         "https://www.dianping.com/shop/k6780SM8AcoSemYw/photos/tag-%E7%8E%AF%E5%A2%83-%E5%A4%A7%E5%A0%82",
         "https://maps.apple.com/?q=%E8%B6%85%E7%BA%A7%E6%B3%B0%E6%B3%B0%E5%BC%8F%E9%BA%BB%E8%BE%A3%E7%83%AB%20%E9%99%86%E5%AE%B6%E5%98%B4%E4%B8%AD%E5%BF%83"
@@ -50,6 +52,7 @@
       "map_query": "董小婉 陆家嘴中心店",
       "active": true,
       "source_urls": [
+        "https://www.dianping.com/shop/EJKNBhZkz5oEC9wO",
         "https://maps.apple.com/place?auid=1118678190673067&lsp=57879",
         "https://maps.apple.com/?q=%E8%91%A3%E5%B0%8F%E5%A9%89%20%E9%99%86%E5%AE%B6%E5%98%B4%E4%B8%AD%E5%BF%83"
       ]
@@ -67,6 +70,7 @@
       "map_query": "CHARLIE'S 粉红汉堡 陆家嘴中心店",
       "active": true,
       "source_urls": [
+        "https://www.dianping.com/shop/k6BVu3iRaKEqP9nZ",
         "https://you.ctrip.com/food/shanghai2/18547298-dianping.html",
         "https://www.smartshanghai.com/venue/21553/charlies_l_mall"
       ]
@@ -78,12 +82,13 @@
       "scope": "primary",
       "location": "L+MALL LG03",
       "walking_minutes": null,
-      "price_per_person": 58,
+      "price_per_person": 57,
       "pork_free_hint": "可选芝士、海鲜或鸡肉主食，点餐时确认。",
       "recommended_dishes": ["鸡肉披萨", "西冷牛排", "凤尾虾"],
       "map_query": "必胜客 陆家嘴中心店",
       "active": true,
       "source_urls": [
+        "https://www.dianping.com/shop/H3Zq8NxjOZsmqkFB",
         "https://gs.ctrip.com/html5/you/foods/fooddetail/2/78615474.html",
         "https://maps.apple.com/?q=%E5%BF%85%E8%83%9C%E5%AE%A2%20%E9%99%86%E5%AE%B6%E5%98%B4%E4%B8%AD%E5%BF%83"
       ]
@@ -95,12 +100,13 @@
       "scope": "primary",
       "location": "L+MALL LG01B，近商城路地铁站出入口",
       "walking_minutes": null,
-      "price_per_person": 40,
+      "price_per_person": 29,
       "pork_free_hint": "可选鸡肉套餐，点餐时确认配料。",
       "recommended_dishes": ["原味鸡", "鸡肉汉堡套餐"],
       "map_query": "肯德基 陆家嘴中心店",
       "active": true,
       "source_urls": [
+        "https://www.dianping.com/shop/GaEZcgJ08WCpADrB",
         "https://you.ctrip.com/food/2/25041823.html",
         "https://maps.apple.com/?q=%E8%82%AF%E5%BE%B7%E5%9F%BA%20%E9%99%86%E5%AE%B6%E5%98%B4%E4%B8%AD%E5%BF%83"
       ]
@@ -118,6 +124,7 @@
       "map_query": "Toris 陆家嘴中心L+Mall店",
       "active": true,
       "source_urls": [
+        "https://www.dianping.com/shop/k10vwg8MjugXLzVo",
         "https://www.trip.com/restaurant/china/shanghai/detail/restaurant-136384548/",
         "https://maps.apple.com/place?auid=1118673339591876&lsp=57879"
       ]
@@ -129,7 +136,9 @@
       "cuisine": "牛肉面与西北简餐",
       "scope": "primary",
       "location": "L+MALL LG01A，近商城路地铁站4号口",
+      "price_per_person": 33,
       "source_urls": [
+        "https://www.dianping.com/shop/k4wG7ZVUP9oqDXfk",
         "https://hk.trip.com/restaurant/china/shanghai/detail/restaurant-134847985/"
       ]
     },
@@ -212,6 +221,46 @@
       "location": "L+MALL LG层 MG01，堂食座位较少",
       "price_per_person": 31,
       "source_urls": ["https://www.dianping.com/shop/l8ETT9sdGopJm1bG"]
+    },
+    {
+      "id": "avocado-tree",
+      "name": "油梨树 AVOCADO TREE",
+      "aliases": ["油梨树", "AVOCADO TREE"],
+      "cuisine": "主食碗与轻食简餐",
+      "scope": "primary",
+      "location": "L+MALL LG层 L+食集 MG16",
+      "price_per_person": 47,
+      "source_urls": ["https://www.dianping.com/shop/G6d0eRFQtu07nAnx"]
+    },
+    {
+      "id": "lao-wan-hui",
+      "name": "老碗会·陕西手工面",
+      "aliases": ["老碗会"],
+      "cuisine": "陕西面食",
+      "scope": "primary",
+      "location": "L+MALL LG51，咖喱博士旁",
+      "price_per_person": 38,
+      "source_urls": ["https://www.dianping.com/shop/G3mOjk55uwpadJsn"]
+    },
+    {
+      "id": "jie-dao",
+      "name": "芥道料理·寿司·关东煮",
+      "aliases": ["芥道料理", "芥道"],
+      "cuisine": "寿司与日式简餐",
+      "scope": "primary",
+      "location": "L+MALL LG层美食市集",
+      "price_per_person": 51,
+      "source_urls": ["https://www.dianping.com/shop/G3Pc5FZBJe1SMIgk"]
+    },
+    {
+      "id": "wei-xiao-bao",
+      "name": "煨小煲·鲜牛肉小砂锅",
+      "aliases": ["煨小煲"],
+      "cuisine": "砂锅与米饭套餐",
+      "scope": "primary",
+      "location": "L+MALL LG28B",
+      "price_per_person": 44,
+      "source_urls": ["https://www.dianping.com/shop/l1BrnFuAO29bVrwg"]
     },
     {
       "id": "heiseiya",
