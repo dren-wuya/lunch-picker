@@ -555,13 +555,14 @@
       "cuisine": "潮汕牛肉",
       "scope": "secondary",
       "location": "新大陆广场北楼 2F",
-      "walking_minutes": 7,
+      "walking_minutes": 5,
       "price_per_person": 68,
       "pork_free_hint": "以牛肉为主，可组成不含猪肉的完整午餐。",
       "recommended_dishes": ["沙茶牛腩饭", "牛肉粿条汤", "酸菜牛肉饭"],
       "map_query": "草根牛肉档 新大陆广场店",
       "active": true,
       "source_urls": [
+        "https://www.dianping.com/shop/G50hIBOtijQKWzlP",
         "https://maps.apple.com/?q=%E8%8D%89%E6%A0%B9%E7%89%9B%E8%82%89%E6%A1%A3%20%E6%96%B0%E5%A4%A7%E9%99%86%E5%B9%BF%E5%9C%BA"
       ]
     },
@@ -570,14 +571,15 @@
       "name": "老乡鸡",
       "cuisine": "中式快餐",
       "scope": "secondary",
-      "location": "新大陆广场 B1",
+      "location": "新大陆广场 1F N1-51、N1-52",
       "walking_minutes": 7,
-      "price_per_person": 35,
+      "price_per_person": 31,
       "pork_free_hint": "可选鸡肉套餐及素菜。",
       "recommended_dishes": ["老母鸡汤", "鸡肉套餐"],
       "map_query": "老乡鸡 新大陆广场店",
       "active": true,
       "source_urls": [
+        "https://www.dianping.com/shop/k2X4b1UkMjqrsIxS",
         "https://maps.apple.com/?q=%E8%80%81%E4%B9%A1%E9%B8%A1%20%E6%96%B0%E5%A4%A7%E9%99%86%E5%B9%BF%E5%9C%BA"
       ]
     },
@@ -592,7 +594,7 @@
       "pork_free_hint": "可选虾仁、蟹粉或素浇头，点餐时确认汤底。",
       "recommended_dishes": ["三虾面", "手剥虾仁面", "罗汉净素面"],
       "map_query": "裕兴记 新大陆广场店",
-      "active": true,
+      "active": false,
       "source_urls": [
         "https://maps.apple.com/?q=%E8%A3%95%E5%85%B4%E8%AE%B0%20%E6%96%B0%E5%A4%A7%E9%99%86%E5%B9%BF%E5%9C%BA"
       ]
@@ -603,8 +605,8 @@
       "cuisine": "潮汕卤鹅饭",
       "scope": "secondary",
       "location": "商城路506号，新梅联合广场停车场入口",
-      "walking_minutes": 5,
-      "price_per_person": 73,
+      "walking_minutes": 4,
+      "price_per_person": 75,
       "pork_free_hint": "可选狮头鹅饭，点餐时避开猪杂配菜。",
       "recommended_dishes": ["狮头鹅肉饭", "鹅胗饭"],
       "map_query": "鹅匠 潮汕卤味集市 新梅联合广场店",
@@ -642,8 +644,9 @@
       "pork_free_hint": "可选鸡肉、牛肉、鸡蛋或素食套餐。",
       "recommended_dishes": ["湘味牛腩套餐", "鸡蛋与豆浆套餐"],
       "map_query": "永和豆浆 南泉北路400号",
-      "active": true,
+      "active": false,
       "source_urls": [
+        "https://www.dianping.com/shop/l1LAbDAactyASjU8",
         "https://maps.apple.com/?q=%E6%B0%B8%E5%92%8C%E8%B1%86%E6%B5%86%20%E5%8D%97%E6%B3%89%E5%8C%97%E8%B7%AF400%E5%8F%B7"
       ]
     },
@@ -652,16 +655,38 @@
       "name": "欧记大排档·景德菜",
       "cuisine": "江西景德菜",
       "scope": "secondary",
-      "location": "南泉北路529号，新大陆广场北楼2号楼",
-      "walking_minutes": 7,
+      "location": "新大陆广场北楼 2F N2-01A，草根夜档旁",
+      "walking_minutes": 4,
       "price_per_person": 98,
       "pork_free_hint": "可选牛肉、鸡肉、鱼或素菜配饭。",
       "recommended_dishes": ["江西小炒牛肉", "辣椒炒鸡", "鱼类配饭"],
       "map_query": "欧记大排档 景德菜 浦东首店",
       "active": true,
       "source_urls": [
+        "https://www.dianping.com/shop/k3rKdBX02K9YgzUS",
         "https://maps.apple.com/place?auid=1118729297626195&lsp=57879"
       ]
+    },
+    {
+      "id": "axiangsao-nanquan",
+      "name": "阿祥嫂隆江猪脚饭",
+      "cuisine": "广式卤味饭",
+      "scope": "secondary",
+      "location": "南泉北路400号底层3室",
+      "walking_minutes": 5,
+      "price_per_person": 30,
+      "source_urls": ["https://www.dianping.com/shop/l1LAbDAactyASjU8"]
+    },
+    {
+      "id": "yuxingji-zhangyang",
+      "name": "裕兴记·汤郑兴蟹黄面馆",
+      "aliases": ["裕兴记八佰伴店"],
+      "cuisine": "苏式面馆",
+      "scope": "secondary",
+      "location": "张杨路579号三鑫世界大厦，工商银行隔壁",
+      "walking_minutes": 6,
+      "price_per_person": 90,
+      "source_urls": ["https://m.dianping.com/shop/1425732270"]
     }
   ]
 }
