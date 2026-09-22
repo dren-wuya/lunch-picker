@@ -119,16 +119,20 @@ test("同一轮已经展示的餐厅不会再次进入候选池", () => {
 });
 
 test("注入固定随机数时可以检查等权抽取边界", () => {
-  const first = pickRestaurant(restaurants, [], {
-    scope: "secondary",
-    targetDate: "2026-08-27"
-  }, () => 0);
-  const last = pickRestaurant(restaurants, [], {
-    scope: "secondary",
-    targetDate: "2026-08-27"
-  }, () => 0.999999);
-  assert.equal(first.id, restaurants.find((item) => item.scope === "secondary").id);
-  assert.equal(last.id, restaurants.at(-1).id);
+  const sample = [
+    { id: "closed-first", scope: "secondary", active: false },
+    { id: "primary", scope: "primary" },
+    { id: "first", scope: "secondary" },
+    { id: "last", scope: "secondary", active: true },
+    { id: "closed-last", scope: "secondary", active: false }
+  ];
+  for (const [draw, expected] of [[0, "first"], [0.499999, "first"], [0.5, "last"], [0.999999, "last"]]) {
+    const picked = pickRestaurant(sample, [], {
+      scope: "secondary",
+      targetDate: "2026-08-27"
+    }, () => draw);
+    assert.equal(picked.id, expected);
+  }
 });
 
 test("同一天补记会替换旧记录而不是重复累计", () => {
