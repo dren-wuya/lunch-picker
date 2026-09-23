@@ -328,6 +328,7 @@ export function createView(dispatch) {
     "today-status-detail",
     "manual-today-button",
     "skip-today-button",
+    "result-placeholder",
     "result-section",
     "result-scope",
     "result-price",
@@ -617,6 +618,7 @@ export function createView(dispatch) {
 
   function renderResult() {
     const restaurant = viewModel.currentRestaurant;
+    elements["result-placeholder"].hidden = Boolean(restaurant);
     if (!restaurant) {
       elements["result-section"].hidden = true;
       setMessage(elements["draw-message"], "");
@@ -651,7 +653,7 @@ export function createView(dispatch) {
       : "";
     elements["result-section"].hidden = false;
     if (wasHidden) {
-      elements["result-section"].scrollIntoView({ behavior: "smooth", block: "nearest" });
+      elements["result-section"].scrollIntoView({ behavior: scrollBehavior(), block: "nearest" });
     }
   }
 
@@ -687,7 +689,11 @@ export function createView(dispatch) {
       }
     });
     window.history.replaceState(null, "", "#" + validName);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: scrollBehavior() });
+  }
+
+  function scrollBehavior() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth";
   }
 
   function renderRecordCandidates() {

@@ -304,7 +304,7 @@ test("页面 id 唯一，应用缓存的元素都存在于 HTML", () => {
   const htmlIds = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
   assert.equal(new Set(htmlIds).size, htmlIds.length);
 
-  const cacheBlock = viewSource.match(/\n  \[\n([\s\S]*?)\n  \]\.forEach\(\(id\)/);
+  const cacheBlock = viewSource.match(/\r?\n  \[\r?\n([\s\S]*?)\r?\n  \]\.forEach\(\(id\)/);
   assert.ok(cacheBlock, "无法定位 view 元素缓存列表");
   const cachedIds = [...cacheBlock[1].matchAll(/"([^"]+)"/g)].map((match) => match[1]);
   cachedIds.forEach((id) => assert.ok(htmlIds.includes(id), "HTML 缺少 #" + id));
