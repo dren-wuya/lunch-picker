@@ -450,7 +450,7 @@ test("controller 与 view 通过固定意图和普通 view model 连接", () => 
   );
 
   assert.doesNotMatch(viewSource, /from "\.\/core\.mjs"|localStorage/);
-  assert.doesNotMatch(viewSource, /price_per_person|walking_minutes|pork_free_hint|source_urls|\.active/);
+  assert.doesNotMatch(viewSource, /price_per_person|walking_minutes|pork_free_hint|source_urls|\.active\b/);
   assert.doesNotMatch(appSource, /document\.(?:getElementById|querySelector|createElement)|addEventListener|showModal/);
   assert.match(appSource, /function handleViewIntent\(intent\)/);
   assert.match(appSource, /createView\(\(intent\) => controller\.dispatch\(intent\)\)/);

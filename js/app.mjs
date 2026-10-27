@@ -69,6 +69,18 @@ export function createController(sharedDocument, initialState, {
       || "无猪肉信息尚未核实，请到店点餐时确认配料。";
   }
 
+  function isPublicInfoSourceUrl(url) {
+    const parsed = new URL(url);
+    const host = parsed.hostname;
+    if (/^(maps\.apple\.com|(.+\.)?amap\.com|map\.baidu\.com|maps\.google\.[a-z.]+)$/.test(host)) {
+      return false;
+    }
+    if (host.startsWith("www.google.") && parsed.pathname.startsWith("/maps")) {
+      return false;
+    }
+    return true;
+  }
+
   function presentRestaurant(restaurant) {
     return {
       id: restaurant.id,
@@ -79,11 +91,7 @@ export function createController(sharedDocument, initialState, {
       pricePerPerson: restaurant.price_per_person ?? null,
       walkingMinutes: restaurant.walking_minutes ?? null,
       dietaryNotice: buildDietaryNotice(restaurant),
-      sourceUrls: (restaurant.source_urls || []).filter((url) => {
-        const parsed = new URL(url);
-        return !/^(maps\.apple\.com|(.+\.)?amap\.com|map\.baidu\.com|maps\.google\.[a-z.]+)$/.test(parsed.hostname)
-          && !(parsed.hostname.startsWith("www.google.") && parsed.pathname.startsWith("/maps"));
-      })
+      sourceUrls: (restaurant.source_urls || []).filter(isPublicInfoSourceUrl)
     };
   }
 
@@ -115,11 +123,18 @@ export function createController(sharedDocument, initialState, {
       history: state.history.map(presentHistoryRecord),
       restaurants: activeRestaurants.map(presentRestaurant),
       managedRestaurants: [
-        ...sharedRestaurantsDocument.restaurants.filter((restaurant) => restaurant.active !== false)
-          .map((restaurant) => ({ ...presentManagedRestaurant(restaurant), isPersonal: false,
-            isHidden: state.hidden_shared_restaurant_ids.includes(restaurant.id) })),
-        ...state.personal_restaurants.map((restaurant) => ({ ...presentManagedRestaurant(restaurant),
-          isPersonal: true, isHidden: restaurant.active === false }))
+        ...sharedRestaurantsDocument.restaurants
+          .filter((restaurant) => restaurant.active !== false)
+          .map((restaurant) => ({
+            ...presentManagedRestaurant(restaurant),
+            isPersonal: false,
+            isHidden: state.hidden_shared_restaurant_ids.includes(restaurant.id)
+          })),
+        ...state.personal_restaurants.map((restaurant) => ({
+          ...presentManagedRestaurant(restaurant),
+          isPersonal: true,
+          isHidden: restaurant.active === false
+        }))
       ],
       pendingNames: state.pending_restaurant_names.map((name) => ({
         name,

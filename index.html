@@ -6,9 +6,10 @@
     <meta name="theme-color" content="#f5f1e9">
     <meta name="description" content="陆家嘴中心 L+MALL 工作日午餐随机选择器">
     <title>今天吃什么</title>
-    <link rel="stylesheet" href="./styles.css?v=20260922-1">
+    <link rel="stylesheet" href="./styles.css?v=20261026-1">
   </head>
   <body>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
     <div class="app-shell">
       <header class="site-header">
         <a class="brand" href="#today" data-nav="today" aria-label="返回今天">
@@ -39,7 +40,7 @@
         <p id="header-date" class="header-date"></p>
       </header>
 
-      <main>
+      <main id="main-content" tabindex="-1">
         <section id="view-today" class="view" aria-labelledby="today-title">
           <div class="today-grid">
             <div class="decision-panel">
@@ -175,7 +176,7 @@
                 <button id="export-backup-button" class="button button-secondary" type="button">导出个人备份</button>
                 <label class="button button-quiet file-button">
                   导入个人备份
-                  <input id="import-backup-input" type="file" accept="application/json,.json">
+                  <input id="import-backup-input" type="file" accept="application/json,.json" aria-label="导入个人备份：选择 JSON 文件">
                 </label>
               </div>
             </section>
